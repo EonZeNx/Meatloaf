@@ -22,11 +22,20 @@ protected:
 	bool bPawnImplementsBasicMovement;
 
 	/* Controller */
-	float ControllerPitchLimit;
-	float ControllerYawLimit;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Limit|Yaw")
+	float ControllerUpperYawLimit;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Limit|Yaw")
+	float ControllerLowerYawLimit;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Limit|Pitch")
+	float ControllerUpperPitchLimit;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Limit|Pitch")
+	float ControllerLowerPitchLimit;
 	
 	/* Input */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	float MouseXSensitivity;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	float MouseYSensitivity;
 	
 private:
@@ -38,6 +47,7 @@ public:
 protected:
 	virtual void SetupInputComponent() override;
 	virtual void OnPossess(APawn* InPawn) override;
+	virtual void Tick(float DeltaTime) override;
 	
 private:
 	/* AXES */

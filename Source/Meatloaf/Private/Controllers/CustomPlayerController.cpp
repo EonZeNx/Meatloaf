@@ -4,6 +4,7 @@
 #include "Controllers/CustomPlayerController.h"
 #include "Components/InputComponent.h"
 #include "Interfaces/BasicMovement.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 ACustomPlayerController::ACustomPlayerController()
@@ -13,8 +14,10 @@ ACustomPlayerController::ACustomPlayerController()
 	MouseYSensitivity = 0.33f;
 
 	/* Camera */
-	ControllerPitchLimit = 70.f;
-	ControllerYawLimit = 359.99f;
+	ControllerUpperPitchLimit = 70.f;
+	ControllerLowerPitchLimit = -70.f;
+	ControllerUpperYawLimit = 179.99f;
+	ControllerLowerYawLimit = -179.99f;
 }
 
 void ACustomPlayerController::SetupInputComponent()
@@ -46,16 +49,12 @@ void ACustomPlayerController::SetupInputComponent()
 void ACustomPlayerController::LookYaw(float value)
 {
 	const float Actual = value * MouseXSensitivity;
-	if (FMath::Abs(ControlRotation.Yaw + Actual) > ControllerYawLimit) return;
-	
 	AddYawInput(Actual);
 }
 
 void ACustomPlayerController::LookPitch(float value)
 {
 	const float Actual = value * MouseYSensitivity;
-	if (FMath::Abs(ControlRotation.Pitch + Actual) > ControllerPitchLimit) return;
-	
 	AddPitchInput(Actual);
 }
 
@@ -143,4 +142,22 @@ void ACustomPlayerController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
 	bPawnImplementsBasicMovement = GetPawn()->GetClass()->ImplementsInterface(UBasicMovement::StaticClass());
+}
+
+void ACustomPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (APawn* WorldPawn = GetPawn())
+	{
+		const FRotator PawnRotation = WorldPawn->GetActorRotation();
+
+		const float NewPitchMin = FRotator::NormalizeAxis(ControllerLowerPitchLimit + PawnRotation.Pitch);
+		if (PlayerCameraManager->ViewPitchMin != NewPitchMin)
+			PlayerCameraManager->ViewPitchMin = UKismetMathLibrary::FInterpTo(PlayerCameraManager->ViewPitchMin, NewPitchMin, DeltaTime, 5.f);
+
+		const float NewPitchMax = FRotator::NormalizeAxis(ControllerUpperPitchLimit + PawnRotation.Pitch);
+		if (PlayerCameraManager->ViewPitchMax != NewPitchMax)
+			PlayerCameraManager->ViewPitchMax = UKismetMathLibrary::FInterpTo(PlayerCameraManager->ViewPitchMax, NewPitchMax, DeltaTime, 5.f);
+	}
 }
