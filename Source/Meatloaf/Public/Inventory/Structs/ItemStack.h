@@ -9,7 +9,10 @@
 #include "ItemStack.generated.h"
 
 /**
- * 
+ * Represents an instance of an item.
+ * <br> This instance may have:
+ * <br> - Quantity
+ * <br> - Durability
  */
 USTRUCT(BlueprintType)
 struct MEATLOAF_API FItemStack

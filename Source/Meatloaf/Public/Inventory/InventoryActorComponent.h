@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/DataTable.h"
+
 #include "InventoryActorComponent.generated.h"
 
 /**
@@ -15,6 +17,12 @@ class MEATLOAF_API UInventoryActorComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
+	/**
+	 * @brief Populate this in blueprints, it contains a definition of all valid items
+	 */
+	UPROPERTY(EditAnywhere)
+	UDataTable* ItemDefinitions;
+	
 	// Sets default values for this component's properties
 	UInventoryActorComponent();
 
