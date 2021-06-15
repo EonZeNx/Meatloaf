@@ -1,7 +1,0 @@
-<WorldCreator Version="2.0">
-  <Textures Preview="preview.png" Tags="cliffs" Description="" Publisher="GameTextures" Website="https://www.gametextures.com/" Guid="a74afe85-161b-463f-b1a1-aa5b1774981e">
-    <Diffuse File="Rock_CrackyCliffs_col.png" Time="131898454620000000" />
-    <Normal File="Rock_CrackyCliffs_norm.png" Time="131898457320000000" />
-    <Displacement File="" Time="132681281867256099" />
-  </Textures>
-</WorldCreator>

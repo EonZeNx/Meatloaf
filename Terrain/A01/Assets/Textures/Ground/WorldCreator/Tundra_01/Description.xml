@@ -1,7 +1,0 @@
-<WorldCreator Version="2.0">
-  <Textures Preview="preview.png" Tags="snow" Description="" Publisher="GameTextures" Website="https://www.gametextures.com/" Guid="1df7af6a-7c02-481a-925d-213886008e85">
-    <Diffuse File="Ground_FrozenTundra_col.png" Time="131898454500000000" />
-    <Normal File="Ground_FrozenTundra_norm.png" Time="131955602460000000" />
-    <Displacement File="" Time="132681286649734681" />
-  </Textures>
-</WorldCreator>
