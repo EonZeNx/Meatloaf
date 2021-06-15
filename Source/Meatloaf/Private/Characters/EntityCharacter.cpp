@@ -37,9 +37,9 @@ AEntityCharacter::AEntityCharacter()
 	CurrentCrouchTransitionTime = 0.f;
 
 	/** Jump config. */
-	JumpScalar = 550.f;
+	JumpScalar = 750.f;
 	MaxAirJumps = 1;
-	CurrentAirJumps = MaxAirJumps;
+	CurrentAirJumps = 0;
 }
 
 // Called when the game starts or when spawned
@@ -59,6 +59,11 @@ void AEntityCharacter::Tick(float DeltaTime)
 void AEntityCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void AEntityCharacter::Landed(const FHitResult& Hit)
+{
+	CurrentAirJumps = 0;
 }
 
 
@@ -81,10 +86,14 @@ void AEntityCharacter::MoveLeftRight_Implementation(float value)
 
 void AEntityCharacter::CustomJump_Implementation()
 {
+	if (CMC->IsFalling() && CurrentAirJumps >= MaxAirJumps) return;
+	
 	FVector JumpForce = FVector(0, 0, 1);
 
 	JumpForce = JumpForce * JumpScalar;
 	LaunchCharacter(JumpForce, false, false);
+
+	if (CMC->IsFalling()) CurrentAirJumps++;
 }
 
 // Sprint

@@ -85,6 +85,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void Landed(const FHitResult& Hit) override;
 	
 	UFUNCTION(BlueprintCallable)
     virtual void MoveForBack_Implementation(float value) override;
