@@ -22,8 +22,6 @@ class UItemStackContainer : public UInterface
 class MEATLOAF_API IItemStackContainer
 {
 	GENERATED_BODY()
-
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	/**
 	 * @brief Insert an item into this item container.
@@ -33,7 +31,7 @@ public:
 	 * @return Overflow item stack
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	FItemStack InsertItem(FItem Item, int Quantity);
+	FItemStack* InsertItem(FItem* Item, int Quantity);
 
 	/**
 	 * @brief Remove an item from this item container.
@@ -44,20 +42,20 @@ public:
 	 * @return Items that were removed
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	FItemStack RemoveItem(FItem Item, int Quantity);
-
+	FItemStack* RemoveItem(FItem* Item, int Quantity);
+	
 	/**
 	 * @brief Get all items part of this item container.
 	 * Returns a TArray of item stacks representing the items in the inventory.
 	 * @return All items
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	TArray<FItemStack> GetAllItems();
+	TArray<FItemStack*> GetAllItems() const;
 
 	/**
 	 * @brief Remove all items part of this item container
 	 * @return All items that were removed
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	TArray<FItemStack> RemoveAllItems();
+	TArray<FItemStack*> RemoveAllItems();
 };
