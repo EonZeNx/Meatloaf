@@ -8,3 +8,6 @@
 /Saved/Config/CrashReportClient
 /Saved/Crashes
 /Saved/Logs
+*.sln
+
+/Terrain
