@@ -1,0 +1,7 @@
+<WorldCreator Version="2.0">
+  <Textures Preview="preview.png" Tags="rocky" Description="" Publisher="GameTextures" Website="https://www.gametextures.com/" Guid="63aa9f71-16a0-4582-98ee-823210b95d3a">
+    <Diffuse File="Rock_sobermanRockWall_col.png" Time="131898454640000000" />
+    <Normal File="Rock_sobermanRockWall_norm.png" Time="131898457340000000" />
+    <Displacement File="" Time="132681280063089954" />
+  </Textures>
+</WorldCreator>

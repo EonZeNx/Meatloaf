@@ -1,0 +1,7 @@
+<WorldCreator Version="2.0">
+  <Textures Preview="preview.png" Tags="dirt;mud" Description="" Publisher="GameTextures" Website="https://www.gametextures.com/" Guid="0b87582e-2c82-4992-9f4d-c6385bf76741">
+    <Diffuse File="Dirt_CrackedDryDirt_col.png" Time="131898454380000000" />
+    <Normal File="Dirt_CrackedDryDirt_norm.png" Time="131898457180000000" />
+    <Displacement File="" Time="132681318468435292" />
+  </Textures>
+</WorldCreator>

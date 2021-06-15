@@ -1,0 +1,334 @@
+<WorldCreator Version="2.0">
+  <CameraLocations />
+  <Surface>
+    <Base Seed="0" WidthResolution="2551" LengthResolution="2551" Steps="10" Area="0" Precision="9" IsInvertArea="False" IsSizeLocked="True" BlendmapAreaRelativeHeight="0" BlendmapAreaStrength="1" TerrainHeightRange="-50000:0:50000:0" IsSoilEnabled="True" SoilDepth="50" SoilBrightness="1" SoilContrast="1" SoilSaturation="1" SoilMetallic="0" SoilSmoothness="0.2" SoilColorFactor="0.1" SoilNormalFactor="0.1" SoilTileSize="1" SoilGradient="" IsCustomBaseShape="False" IsUseDistributionCurve="False" NoiseDistributionScale="1" IsEditOffsets="False" IsLockOffsetsXZ="False" SeamlessX="False" SeamlessZ="False" BorderBlendRangeSeamlessTerrain="0:0.5:1:1">
+      <BaseFilter>
+        <FilterValue Name="General Strength" Value="100" />
+        <FilterValue Name="Factor" Value="0.95" />
+        <FilterLevel Name="Level Strength Step 1" Value="100" />
+        <FilterLevel Name="Level Strength Step 2" Value="100" />
+        <FilterLevel Name="Level Strength Step 3" Value="100" />
+        <FilterLevel Name="Level Strength Step 4" Value="100" />
+        <FilterLevel Name="Level Strength Step 5" Value="100" />
+        <FilterLevel Name="Level Strength Step 6" Value="100" />
+        <FilterLevel Name="Level Strength Step 7" Value="100" />
+        <FilterLevel Name="Level Strength Step 8" Value="100" />
+        <FilterLevel Name="Level Strength Step 9" Value="75" />
+        <FilterLevel Name="Level Strength Step 10" Value="50" />
+        <FilterLevel Name="Level Strength Step 11" Value="40" />
+        <FilterLevel Name="Level Strength Step 12" Value="30" />
+        <FilterLevel Name="Level Strength Step 13" Value="20" />
+        <FilterLevel Name="Level Strength Step 14" Value="0" />
+        <FilterLevel Name="Level Strength Step 15" Value="0" />
+        <FilterLevel Name="Level Strength Step 16" Value="0" />
+        <FilterLevel Name="Level Strength Step 17" Value="0" />
+        <FilterLevel Name="Level Strength Step 18" Value="0" />
+        <FilterLevel Name="Level Strength Step 19" Value="0" />
+        <FilterLevel Name="Level Strength Step 20" Value="0" />
+      </BaseFilter>
+      <DistributionCurve CurveBuffer="AAAAAIGAgDuBgAA8wcBAPIGAgDyhoKA8wcDAPOHg4DyBgAA9kZAQPaGgID2xsDA9wcBAPdHQUD3h4GA98fBwPYGAgD2JiIg9kZCQPZmYmD2hoKA9qaioPbGwsD25uLg9wcDAPcnIyD3R0NA92djYPeHg4D3p6Og98fDwPfn4+D2BgAA+hYQEPomICD6NjAw+kZAQPpWUFD6ZmBg+nZwcPqGgID6lpCQ+qagoPq2sLD6xsDA+tbQ0Prm4OD69vDw+wcBAPsXERD7JyEg+zcxMPtHQUD7V1FQ+2dhYPt3cXD7h4GA+5eRkPunoaD7t7Gw+8fBwPvX0dD75+Hg+/fx8PoGAgD6DgoI+hYSEPoeGhj6JiIg+i4qKPo2MjD6Pjo4+kZCQPpOSkj6VlJQ+l5aWPpmYmD6bmpo+nZycPp+enj6hoKA+o6KiPqWkpD6npqY+qaioPquqqj6trKw+r66uPrGwsD6zsrI+tbS0Pre2tj65uLg+u7q6Pr28vD6/vr4+wcDAPsPCwj7FxMQ+x8bGPsnIyD7Lyso+zczMPs/Ozj7R0NA+09LSPtXU1D7X1tY+2djYPtva2j7d3Nw+397ePuHg4D7j4uI+5eTkPufm5j7p6Og+6+rqPu3s7D7v7u4+8fDwPvPy8j719PQ+9/b2Pvn4+D77+vo+/fz8Pv/+/j6BgAA/goEBP4OCAj+EgwM/hYQEP4aFBT+HhgY/iIcHP4mICD+KiQk/i4oKP4yLCz+NjAw/jo0NP4+ODj+Qjw8/kZAQP5KRET+TkhI/lJMTP5WUFD+WlRU/l5YWP5iXFz+ZmBg/mpkZP5uaGj+cmxs/nZwcP56dHT+fnh4/oJ8fP6GgID+ioSE/o6IiP6SjIz+lpCQ/pqUlP6emJj+opyc/qagoP6qpKT+rqio/rKsrP62sLD+urS0/r64uP7CvLz+xsDA/srExP7OyMj+0szM/tbQ0P7a1NT+3tjY/uLc3P7m4OD+6uTk/u7o6P7y7Oz+9vDw/vr09P7++Pj/Avz8/wcBAP8LBQT/DwkI/xMNDP8XERD/GxUU/x8ZGP8jHRz/JyEg/yslJP8vKSj/My0s/zcxMP87NTT/Pzk4/0M9PP9HQUD/S0VE/09JSP9TTUz/V1FQ/1tVVP9fWVj/Y11c/2dhYP9rZWT/b2lo/3NtbP93cXD/e3V0/395eP+DfXz/h4GA/4uFhP+PiYj/k42M/5eRkP+blZT/n5mY/6OdnP+noaD/q6Wk/6+pqP+zraz/t7Gw/7u1tP+/ubj/w728/8fBwP/LxcT/z8nI/9PNzP/X0dD/29XU/9/Z2P/j3dz/5+Hg/+vl5P/v6ej/8+3s//fx8P/79fT///n4/AACAPw==" />
+      <CustomBaseShape>
+        <Point Position="0,0,0" />
+        <Point Position="1,0,0" />
+        <Point Position="2,0,0" />
+        <Point Position="3,0,0" />
+        <Point Position="0,1,0" />
+        <Point Position="1,1,0" />
+        <Point Position="2,1,0" />
+        <Point Position="3,1,0" />
+        <Point Position="0,2,0" />
+        <Point Position="1,2,0" />
+        <Point Position="2,2,0" />
+        <Point Position="3,2,0" />
+        <Point Position="0,3,0" />
+        <Point Position="1,3,0" />
+        <Point Position="2,3,0" />
+        <Point Position="3,3,0" />
+      </CustomBaseShape>
+      <LevelOffsets>
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+        <Offset Value="0,0" />
+      </LevelOffsets>
+    </Base>
+    <Filters>
+      <Layer IsEnabled="True" Name="Layer 01" Area="0" IsInvertArea="False">
+        <Filter IsEnabled="True" ClassName="FilterNoise" Operation="0" IsRelativeToOcean="False" TerrainHeightRelativeToOcean="-20000:-10:20000:10" TerrainHeight="-20000:-500:20000:500" HeightRangeEnabled="False" SmoothHeightStart="0" SmoothHeightEnd="0" IsSlopeSelectEnabled="False" TerrainSlope="0:0:90:90" SmoothSlopeStart="0" SmoothSlopeEnd="0" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="1000" SurfaceNoiseScale="32" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0" SurfaceNoiseFactorHigh="1" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" CavityType="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6">
+          <FilterValue Name="General Strength" Value="100" />
+          <FilterValue Name="Seed" Value="17475" />
+          <FilterValue Name="Scale" Value="50" />
+          <FilterValue Name="Height" Value="50" />
+          <FilterValue Name="Depth" Value="25.48284" />
+          <FilterValue Name="MinCut" Value="0.0007004738" />
+          <FilterValue Name="MaxCut" Value="1" />
+          <FilterValue Name="MinValue" Value="-1" />
+          <FilterValue Name="MaxValue" Value="1" />
+          <FilterValue Name="Type" Value="0" />
+          <FilterValue Name="Height Offset" Value="0" />
+          <FilterValue Name="Set Mode" Value="False" />
+          <FilterValue Name="Resize to Step" Value="True" />
+          <FilterLevel Name="Level Strength Step 1" Value="0" />
+          <FilterLevel Name="Level Strength Step 2" Value="53.03712" />
+          <FilterLevel Name="Level Strength Step 3" Value="35.52487" />
+          <FilterLevel Name="Level Strength Step 4" Value="15.51086" />
+          <FilterLevel Name="Level Strength Step 5" Value="9.006305" />
+          <FilterLevel Name="Level Strength Step 6" Value="4.002802" />
+          <FilterLevel Name="Level Strength Step 7" Value="5.503853" />
+          <FilterLevel Name="Level Strength Step 8" Value="2.501751" />
+          <FilterLevel Name="Level Strength Step 9" Value="3.002101" />
+          <FilterLevel Name="Level Strength Step 10" Value="0" />
+          <FilterLevel Name="Level Strength Step 11" Value="100" />
+          <FilterLevel Name="Level Strength Step 12" Value="100" />
+          <FilterLevel Name="Level Strength Step 13" Value="100" />
+          <FilterLevel Name="Level Strength Step 14" Value="100" />
+          <FilterLevel Name="Level Strength Step 15" Value="100" />
+          <FilterLevel Name="Level Strength Step 16" Value="100" />
+          <FilterLevel Name="Level Strength Step 17" Value="100" />
+          <FilterLevel Name="Level Strength Step 18" Value="100" />
+          <FilterLevel Name="Level Strength Step 19" Value="100" />
+          <FilterLevel Name="Level Strength Step 20" Value="100" />
+        </Filter>
+        <Filter IsEnabled="True" ClassName="FilterAngledErosion" Operation="0" IsRelativeToOcean="False" TerrainHeightRelativeToOcean="-20000:-10:20000:10" TerrainHeight="-20000:-500:20000:500" HeightRangeEnabled="False" SmoothHeightStart="0" SmoothHeightEnd="0" IsSlopeSelectEnabled="False" TerrainSlope="0:0:90:90" SmoothSlopeStart="0" SmoothSlopeEnd="0" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="1000" SurfaceNoiseScale="32" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0" SurfaceNoiseFactorHigh="1" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" CavityType="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6">
+          <FilterValue Name="General Strength" Value="100" />
+          <FilterValue Name="Depth" Value="0.4603222" />
+          <FilterValue Name="Amount" Value="0" />
+          <FilterValue Name="Erosion Smoothness" Value="0.459972" />
+          <FilterValue Name="Ridge Smoothness" Value="0" />
+          <FilterLevel Name="Level Strength Step 1" Value="0" />
+          <FilterLevel Name="Level Strength Step 2" Value="0" />
+          <FilterLevel Name="Level Strength Step 3" Value="0" />
+          <FilterLevel Name="Level Strength Step 4" Value="100" />
+          <FilterLevel Name="Level Strength Step 5" Value="100" />
+          <FilterLevel Name="Level Strength Step 6" Value="100" />
+          <FilterLevel Name="Level Strength Step 7" Value="100" />
+          <FilterLevel Name="Level Strength Step 8" Value="0" />
+          <FilterLevel Name="Level Strength Step 9" Value="0" />
+          <FilterLevel Name="Level Strength Step 10" Value="0" />
+          <FilterLevel Name="Level Strength Step 11" Value="100" />
+          <FilterLevel Name="Level Strength Step 12" Value="100" />
+          <FilterLevel Name="Level Strength Step 13" Value="100" />
+          <FilterLevel Name="Level Strength Step 14" Value="100" />
+          <FilterLevel Name="Level Strength Step 15" Value="100" />
+          <FilterLevel Name="Level Strength Step 16" Value="100" />
+          <FilterLevel Name="Level Strength Step 17" Value="100" />
+          <FilterLevel Name="Level Strength Step 18" Value="100" />
+          <FilterLevel Name="Level Strength Step 19" Value="100" />
+          <FilterLevel Name="Level Strength Step 20" Value="100" />
+        </Filter>
+        <Filter IsEnabled="True" ClassName="FilterRidgedV2" Operation="0" IsRelativeToOcean="False" TerrainHeightRelativeToOcean="-20000:-10:20000:10" TerrainHeight="-20000:-500:20000:500" HeightRangeEnabled="False" SmoothHeightStart="0" SmoothHeightEnd="0" IsSlopeSelectEnabled="False" TerrainSlope="0:0:90:90" SmoothSlopeStart="0" SmoothSlopeEnd="0" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="1000" SurfaceNoiseScale="32" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0" SurfaceNoiseFactorHigh="1" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" CavityType="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6">
+          <FilterValue Name="General Strength" Value="26.94887" />
+          <FilterValue Name="Sharpness" Value="5" />
+          <FilterValue Name="Sharpness Strength" Value="100" />
+          <FilterValue Name="Modulator" Value="1" />
+          <FilterLevel Name="Level Strength Step 1" Value="0" />
+          <FilterLevel Name="Level Strength Step 2" Value="0" />
+          <FilterLevel Name="Level Strength Step 3" Value="100" />
+          <FilterLevel Name="Level Strength Step 4" Value="100" />
+          <FilterLevel Name="Level Strength Step 5" Value="100" />
+          <FilterLevel Name="Level Strength Step 6" Value="100" />
+          <FilterLevel Name="Level Strength Step 7" Value="100" />
+          <FilterLevel Name="Level Strength Step 8" Value="0" />
+          <FilterLevel Name="Level Strength Step 9" Value="0" />
+          <FilterLevel Name="Level Strength Step 10" Value="0" />
+          <FilterLevel Name="Level Strength Step 11" Value="100" />
+          <FilterLevel Name="Level Strength Step 12" Value="100" />
+          <FilterLevel Name="Level Strength Step 13" Value="100" />
+          <FilterLevel Name="Level Strength Step 14" Value="100" />
+          <FilterLevel Name="Level Strength Step 15" Value="100" />
+          <FilterLevel Name="Level Strength Step 16" Value="100" />
+          <FilterLevel Name="Level Strength Step 17" Value="100" />
+          <FilterLevel Name="Level Strength Step 18" Value="100" />
+          <FilterLevel Name="Level Strength Step 19" Value="100" />
+          <FilterLevel Name="Level Strength Step 20" Value="100" />
+        </Filter>
+      </Layer>
+      <Layer IsEnabled="True" Name="Layer 02" Area="0" IsInvertArea="False">
+        <Filter IsEnabled="True" ClassName="FilterSedimentV2" Operation="3" IsRelativeToOcean="False" TerrainHeightRelativeToOcean="-20000:-10:20000:10" TerrainHeight="-20000:-500:20000:500" HeightRangeEnabled="False" SmoothHeightStart="0" SmoothHeightEnd="0" IsSlopeSelectEnabled="False" TerrainSlope="0:0:90:90" SmoothSlopeStart="0" SmoothSlopeEnd="0" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="1000" SurfaceNoiseScale="32" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0" SurfaceNoiseFactorHigh="1" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" CavityType="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6">
+          <FilterValue Name="General Strength" Value="15" />
+          <FilterValue Name="Length" Value="45" />
+          <FilterValue Name="Quality" Value="7" />
+          <FilterLevel Name="Level Strength Step 1" Value="0" />
+          <FilterLevel Name="Level Strength Step 2" Value="0" />
+          <FilterLevel Name="Level Strength Step 3" Value="0" />
+          <FilterLevel Name="Level Strength Step 4" Value="0" />
+          <FilterLevel Name="Level Strength Step 5" Value="0" />
+          <FilterLevel Name="Level Strength Step 6" Value="0" />
+          <FilterLevel Name="Level Strength Step 7" Value="100" />
+          <FilterLevel Name="Level Strength Step 8" Value="100" />
+          <FilterLevel Name="Level Strength Step 9" Value="100" />
+          <FilterLevel Name="Level Strength Step 10" Value="0" />
+          <FilterLevel Name="Level Strength Step 11" Value="100" />
+          <FilterLevel Name="Level Strength Step 12" Value="100" />
+          <FilterLevel Name="Level Strength Step 13" Value="100" />
+          <FilterLevel Name="Level Strength Step 14" Value="100" />
+          <FilterLevel Name="Level Strength Step 15" Value="100" />
+          <FilterLevel Name="Level Strength Step 16" Value="100" />
+          <FilterLevel Name="Level Strength Step 17" Value="100" />
+          <FilterLevel Name="Level Strength Step 18" Value="100" />
+          <FilterLevel Name="Level Strength Step 19" Value="100" />
+          <FilterLevel Name="Level Strength Step 20" Value="100" />
+        </Filter>
+        <Filter IsEnabled="True" ClassName="FilterMountainRange" Operation="0" IsRelativeToOcean="False" TerrainHeightRelativeToOcean="-20000:-10:20000:10" TerrainHeight="-20000:-500:20000:500" HeightRangeEnabled="False" SmoothHeightStart="0" SmoothHeightEnd="0" IsSlopeSelectEnabled="False" TerrainSlope="0:0:90:90" SmoothSlopeStart="0" SmoothSlopeEnd="0" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="1000" SurfaceNoiseScale="32" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0" SurfaceNoiseFactorHigh="1" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" CavityType="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6">
+          <FilterValue Name="General Strength" Value="27.94956" />
+          <FilterValue Name="Sub Ridges" Value="1" />
+          <FilterValue Name="Smoothness" Value="0" />
+          <FilterLevel Name="Level Strength Step 1" Value="0" />
+          <FilterLevel Name="Level Strength Step 2" Value="0" />
+          <FilterLevel Name="Level Strength Step 3" Value="0" />
+          <FilterLevel Name="Level Strength Step 4" Value="100" />
+          <FilterLevel Name="Level Strength Step 5" Value="100" />
+          <FilterLevel Name="Level Strength Step 6" Value="100" />
+          <FilterLevel Name="Level Strength Step 7" Value="100" />
+          <FilterLevel Name="Level Strength Step 8" Value="100" />
+          <FilterLevel Name="Level Strength Step 9" Value="0" />
+          <FilterLevel Name="Level Strength Step 10" Value="0" />
+          <FilterLevel Name="Level Strength Step 11" Value="100" />
+          <FilterLevel Name="Level Strength Step 12" Value="100" />
+          <FilterLevel Name="Level Strength Step 13" Value="100" />
+          <FilterLevel Name="Level Strength Step 14" Value="100" />
+          <FilterLevel Name="Level Strength Step 15" Value="100" />
+          <FilterLevel Name="Level Strength Step 16" Value="100" />
+          <FilterLevel Name="Level Strength Step 17" Value="100" />
+          <FilterLevel Name="Level Strength Step 18" Value="100" />
+          <FilterLevel Name="Level Strength Step 19" Value="100" />
+          <FilterLevel Name="Level Strength Step 20" Value="100" />
+        </Filter>
+        <Filter IsEnabled="True" ClassName="FilterRidgedV2" Operation="0" IsRelativeToOcean="False" TerrainHeightRelativeToOcean="-20000:-10:20000:10" TerrainHeight="-20000:-500:20000:500" HeightRangeEnabled="False" SmoothHeightStart="0" SmoothHeightEnd="0" IsSlopeSelectEnabled="False" TerrainSlope="0:0:90:90" SmoothSlopeStart="0" SmoothSlopeEnd="0" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="1000" SurfaceNoiseScale="32" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0" SurfaceNoiseFactorHigh="1" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" CavityType="1" CavitySteps="8" CavityStepSize="1.794256" CavityStrength="6">
+          <FilterValue Name="General Strength" Value="36.45552" />
+          <FilterValue Name="Sharpness" Value="5" />
+          <FilterValue Name="Sharpness Strength" Value="100" />
+          <FilterValue Name="Modulator" Value="1" />
+          <FilterLevel Name="Level Strength Step 1" Value="0" />
+          <FilterLevel Name="Level Strength Step 2" Value="0" />
+          <FilterLevel Name="Level Strength Step 3" Value="100" />
+          <FilterLevel Name="Level Strength Step 4" Value="100" />
+          <FilterLevel Name="Level Strength Step 5" Value="100" />
+          <FilterLevel Name="Level Strength Step 6" Value="100" />
+          <FilterLevel Name="Level Strength Step 7" Value="100" />
+          <FilterLevel Name="Level Strength Step 8" Value="100" />
+          <FilterLevel Name="Level Strength Step 9" Value="100" />
+          <FilterLevel Name="Level Strength Step 10" Value="100" />
+          <FilterLevel Name="Level Strength Step 11" Value="100" />
+          <FilterLevel Name="Level Strength Step 12" Value="100" />
+          <FilterLevel Name="Level Strength Step 13" Value="100" />
+          <FilterLevel Name="Level Strength Step 14" Value="100" />
+          <FilterLevel Name="Level Strength Step 15" Value="100" />
+          <FilterLevel Name="Level Strength Step 16" Value="100" />
+          <FilterLevel Name="Level Strength Step 17" Value="100" />
+          <FilterLevel Name="Level Strength Step 18" Value="100" />
+          <FilterLevel Name="Level Strength Step 19" Value="100" />
+          <FilterLevel Name="Level Strength Step 20" Value="100" />
+        </Filter>
+        <Filter IsEnabled="True" ClassName="FilterSedimentV1" Operation="0" IsRelativeToOcean="False" TerrainHeightRelativeToOcean="-20000:-10:20000:10" TerrainHeight="-20000:-500:20000:500" HeightRangeEnabled="False" SmoothHeightStart="0" SmoothHeightEnd="0" IsSlopeSelectEnabled="False" TerrainSlope="0:0:90:90" SmoothSlopeStart="0" SmoothSlopeEnd="0" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="1000" SurfaceNoiseScale="32" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0" SurfaceNoiseFactorHigh="1" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" CavityType="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6">
+          <FilterValue Name="General Strength" Value="24.94746" />
+          <FilterValue Name="Length" Value="100" />
+          <FilterValue Name="Quality" Value="7" />
+          <FilterValue Name="Type" Value="0" />
+          <FilterLevel Name="Level Strength Step 1" Value="0" />
+          <FilterLevel Name="Level Strength Step 2" Value="0" />
+          <FilterLevel Name="Level Strength Step 3" Value="0" />
+          <FilterLevel Name="Level Strength Step 4" Value="0" />
+          <FilterLevel Name="Level Strength Step 5" Value="0" />
+          <FilterLevel Name="Level Strength Step 6" Value="0" />
+          <FilterLevel Name="Level Strength Step 7" Value="100" />
+          <FilterLevel Name="Level Strength Step 8" Value="100" />
+          <FilterLevel Name="Level Strength Step 9" Value="100" />
+          <FilterLevel Name="Level Strength Step 10" Value="0" />
+          <FilterLevel Name="Level Strength Step 11" Value="100" />
+          <FilterLevel Name="Level Strength Step 12" Value="100" />
+          <FilterLevel Name="Level Strength Step 13" Value="100" />
+          <FilterLevel Name="Level Strength Step 14" Value="100" />
+          <FilterLevel Name="Level Strength Step 15" Value="100" />
+          <FilterLevel Name="Level Strength Step 16" Value="100" />
+          <FilterLevel Name="Level Strength Step 17" Value="100" />
+          <FilterLevel Name="Level Strength Step 18" Value="100" />
+          <FilterLevel Name="Level Strength Step 19" Value="100" />
+          <FilterLevel Name="Level Strength Step 20" Value="100" />
+        </Filter>
+      </Layer>
+      <Layer IsEnabled="True" Name="Layer 03" Area="0" IsInvertArea="False" />
+    </Filters>
+  </Surface>
+  <Texturing>
+    <General IsTexturingHeightbased="False" TexturingHeightSmooth="0.1" IsTriPlanarEnabled="False" TriplanarFactor="1" IsPerlinNormalNoiseEnabled="False" PerlinNormalNoiseScale="100" PerlinNormalNoiseWorldSize="128" PerlinNormalNoiseSeed="512" PerlinNormalNoiseOctaves="10" PerlinNormalNoiseDepth="0" PerlinNormalNoiseFactor="0.5" PerlinNormalDistanceStart="0" PerlinNormalFadeLength="10" IsEliminateTiling="False" TopomapRange="-3.402823E+38:-100:3.402823E+38:500" TopomapGradient="0|4278190335;0.09090909|4285726975;0.1818182|4293329151;0.2727273|2734620927;0.3636364|788463871;0.4545455|16729599;0.5454546|16759295;0.6363636|13697023;0.7272727|6094847;0.8181818|385941503;0.9090909|2332098559;1|4261478399;" TopomapLineColor="RGBA(0.000, 0.000, 0.000, 0.750)" TopomapSubLineColor="RGBA(0.000, 0.000, 0.000, 0.500)" TopoLineDistance="25" TopoSubLineCount="4" FlowEvaporation="0" FlowIterations="100" FlowSmoothness="0.21" FlowRainProbability="1" FlowRainStrength="1" FlowViscosity="1" />
+    <Textures>
+      <Layer IsEnabled="True" IsInvertArea="False" Name="Grass" Area="0">
+        <Texture TextureAssetGUID="a74afe85-161b-463f-b1a1-aa5b1774981e" IsEnabled="True" Tag="Rock" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="False" HeightRange="-20000:-500:20000:500" TerrainHeightMin="-500" TerrainHeightMax="500" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="0" SmoothHeightEnd="0" IsHeightNoiseEnabled="False" HeightNoiseWorldSize="1000" HeightNoiseScale="32" HeightNoiseSeed="512" HeightNoiseOctaves="10" HeightNoiseDepth="0" HeightNoiseFactor="1" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="False" SlopeRange="0:0:90:90" SmoothSlopeStart="0.1" SmoothSlopeEnd="0.1" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+        <Texture TextureAssetGUID="eb770687-e4f9-439b-9f92-4c40e10ae09b" IsEnabled="True" Tag="Grass01" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="True" HeightRange="-20000:0:20000:140" TerrainHeightMin="0" TerrainHeightMax="140" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="0" SmoothHeightEnd="20" IsHeightNoiseEnabled="True" HeightNoiseWorldSize="2000" HeightNoiseScale="19.45117" HeightNoiseSeed="468" HeightNoiseOctaves="16" HeightNoiseDepth="1.748657" HeightNoiseFactor="0.6896134" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="True" SlopeRange="0:0:90:25" SmoothSlopeStart="0.1" SmoothSlopeEnd="0.1" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+        <Texture TextureAssetGUID="4150401b-c5f6-45fb-b3bf-097f4b2993f2" IsEnabled="True" Tag="Grass02" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="0" CavitySteps="4" CavityStepSize="10" CavityStrength="6" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="True" HeightRange="-20000:0:20000:0" TerrainHeightMin="0" TerrainHeightMax="0" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="0" SmoothHeightEnd="200" IsHeightNoiseEnabled="False" HeightNoiseWorldSize="1000" HeightNoiseScale="32" HeightNoiseSeed="512" HeightNoiseOctaves="10" HeightNoiseDepth="0" HeightNoiseFactor="1" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="True" SlopeRange="0:0:90:20" SmoothSlopeStart="0.1" SmoothSlopeEnd="0.01" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+      </Layer>
+      <Layer IsEnabled="True" IsInvertArea="False" Name="Dirt" Area="0">
+        <Texture TextureAssetGUID="0b87582e-2c82-4992-9f4d-c6385bf76741" IsEnabled="True" Tag="Default" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="2" CavitySteps="4" CavityStepSize="5.470346" CavityStrength="3.998525" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="True" HeightRange="-20000:0:20000:120" TerrainHeightMin="0" TerrainHeightMax="120" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="0" SmoothHeightEnd="180" IsHeightNoiseEnabled="False" HeightNoiseWorldSize="1000" HeightNoiseScale="32" HeightNoiseSeed="512" HeightNoiseOctaves="10" HeightNoiseDepth="0" HeightNoiseFactor="1" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="False" SlopeRange="0:0:90:90" SmoothSlopeStart="0.1" SmoothSlopeEnd="0.1" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+      </Layer>
+      <Layer IsEnabled="True" IsInvertArea="False" Name="Snow" Area="0">
+        <Texture TextureAssetGUID="1df7af6a-7c02-481a-925d-213886008e85" IsEnabled="True" Tag="CompactSnow" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="2" CavitySteps="1" CavityStepSize="1.790793" CavityStrength="20" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="True" HeightRange="-20000:200:20000:300" TerrainHeightMin="200" TerrainHeightMax="300" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="100" SmoothHeightEnd="0" IsHeightNoiseEnabled="False" HeightNoiseWorldSize="1000" HeightNoiseScale="32" HeightNoiseSeed="512" HeightNoiseOctaves="10" HeightNoiseDepth="0" HeightNoiseFactor="1" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="False" SlopeRange="0:0:90:50" SmoothSlopeStart="0.01" SmoothSlopeEnd="0.1" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+        <Texture TextureAssetGUID="1df7af6a-7c02-481a-925d-213886008e85" IsEnabled="True" Tag="CompactSnow" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="2" CavitySteps="20" CavityStepSize="0.4732961" CavityStrength="2.5" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="True" HeightRange="-20000:200:20000:300" TerrainHeightMin="200" TerrainHeightMax="300" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="100" SmoothHeightEnd="0" IsHeightNoiseEnabled="False" HeightNoiseWorldSize="1000" HeightNoiseScale="32" HeightNoiseSeed="512" HeightNoiseOctaves="10" HeightNoiseDepth="0" HeightNoiseFactor="1" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="False" SlopeRange="0:0:90:70" SmoothSlopeStart="0.01" SmoothSlopeEnd="0.01" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+        <Texture TextureAssetGUID="1df7af6a-7c02-481a-925d-213886008e85" IsEnabled="True" Tag="CompactSnow" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="2" CavitySteps="7" CavityStepSize="3.370903" CavityStrength="20" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="True" HeightRange="-20000:200:20000:300" TerrainHeightMin="200" TerrainHeightMax="300" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="100" SmoothHeightEnd="0" IsHeightNoiseEnabled="False" HeightNoiseWorldSize="1000" HeightNoiseScale="32" HeightNoiseSeed="512" HeightNoiseOctaves="10" HeightNoiseDepth="0" HeightNoiseFactor="1" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="False" SlopeRange="0:0:90:50" SmoothSlopeStart="0.01" SmoothSlopeEnd="0.1" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+        <Texture TextureAssetGUID="1df7af6a-7c02-481a-925d-213886008e85" IsEnabled="True" Tag="CompactSnow" Operation="0" IsTileSizeLocked="True" TileSizeX="4" TileSizeY="4" IsTileOffsetLocked="True" TileOffsetX="0" TileOffsetY="0" ShadeColor="RGBA(1.000, 1.000, 1.000, 1.000)" Metallic="0" Smoothness="0" Brightness="1" Contrast="1" HeightScale="1" Cavity="2" CavitySteps="3" CavityStepSize="11.68693" CavityStrength="8.623196" RoughnessSteps="7" RoughnessStepSize="7" RoughnessStrength="5" RoughnessEnabled="False" RoughnessInvert="False" IsSurfaceNoiseEnabled="False" SurfaceNoiseWorldSize="2000" SurfaceNoiseScale="4" SurfaceNoiseSeed="512" SurfaceNoiseOctaves="10" SurfaceNoiseDepth="0" SurfaceNoiseFactor="1" SurfaceNoiseFactorLow="0.2" SurfaceNoiseFactorHigh="0.8" IsHeightRangeEnabled="True" HeightRange="-20000:200:20000:300" TerrainHeightMin="200" TerrainHeightMax="300" IsRelativeToOcean="False" TerrainRelativeHeightMin="-10" TerrainRelativeHeightMax="10" SmoothHeightStart="100" SmoothHeightEnd="0" IsHeightNoiseEnabled="False" HeightNoiseWorldSize="1000" HeightNoiseScale="32" HeightNoiseSeed="512" HeightNoiseOctaves="10" HeightNoiseDepth="0" HeightNoiseFactor="1" HeightNoiseFactorLow="0" HeightNoiseFactorHigh="1" IsSlopeSelectEnabled="False" SlopeRange="0:0:90:50" SmoothSlopeStart="0.01" SmoothSlopeEnd="0.1" IsFollowSunDirection="False" IsInvertSunDirection="False" FollowSunSmoothness="0.1" Weight="1" GradientEnabled="False" IsGradientHeightAlignedToTerrain="True" GradientOffset="0" GradientSize="300" GradientStrength="1" Gradient="" WeightGradientEnabled="False" WeightGradientStrength="1" WeightGradient="" IsAngleSelectEnabled="False" AngleWidth="32" Angle="0" AngleSmoothness="0.1" FluidSimulationSurface="0" FlowEnabled="False" FlowRange="0:1.19:3.402823E+38:20" FlowSmoothnessUpper="0" FlowSmoothnessLower="1.2" FlowWaterFactor="0" FlowWaterSmoothness="0" />
+      </Layer>
+    </Textures>
+    <Geological />
+  </Texturing>
+  <Scene>
+    <Objects />
+    <Details />
+    <Enviro>
+      <Ocean IsShowOcean="False" Height="0" SubsurfaceScattering="0.25" WaterDropsIntensity="0.3" Diffuse="RGBA(0.390, 0.440, 0.420, 1.000)" Reflection="RGBA(1.000, 1.000, 1.000, 1.000)" Specular="RGBA(0.000, 0.000, 0.000, 1.000)" />
+      <Rain />
+      <Wind Direction="0" Intensity="0.1" Turbulence="0.1" Magnitude="0.5" Frequency="0.01" />
+      <Sky Mode="1" Color="RGBA(0.350, 0.350, 0.350, 1.000)" TimeOfDay="16" Speed="0.01" />
+      <WorldInscatter IsSkyboxOceanDisabled="True" IsHeightFogEnabled="True" IsWorldInscatterEnabled="True" AtmosphereScatteringIntensity="0.5" AtmosphereScatteringExtinction="0" AtmosphereScatteringScale="2" AtmosphereScatteringNearPush="1000" IsFogEnabled="True" IsFogColorLockedToSkyColor="True" FogColor="RGBA(0.500, 0.500, 0.500, 1.000)" Density="0.2" StartDistance="0" IsExcludeFarPixels="True" IsUseRadialDistance="True" Height="50" HeightDensity="0.1" Haze="31.6" HazeBase="0" HazeScale="1.3" Eccentricity="0.04" MieRed="6.08" MieGreen="8.14" MieBlue="11.64" Thickness="1" WaveLengths="680,550,440" />
+      <SunAndMoon IsSunShaftsEnabled="True" IsSunShaftsTintUseLightColor="True" SunShaftsThreshold="0" SunShaftsRadius="1" SunShaftsScale="1" SunShaftsTint="RGBA(1.000, 1.000, 1.000, 1.000)" SunSize="1" SunIntensity="1" MoonIntensity="0.2" Exposure="1" MieScattering="1" AnisotropyFactor="0.76" SunMode="0" Latitude="0" Longitude="0" SunDirection="0" SunEquatorOffset="0" MoonPositionOffset="0" />
+      <Clouds Density="1" Attenuation="0.5" StepSize="0.001" AlphaSaturation="2.2" LightColorMultiplier="4" SkyColorMultiplier="1.5" ScatterMultiplier="1" RotationSpeed="0.25" Altitude="2" Height="3" Volume="50" Extinction="0.003" AmbientLight="1" IndirectLight="0.6" CloudTexture="e05c66fb-7f05-4933-84e3-b65621fb149d" />
+    </Enviro>
+    <Render>
+      <AnamorphicFlares IsEnabled="False" IsUltra="True" IsReduceFlicker="True" IsVertical="False" Intensity="0.8" Threshold="1.5" Spread="0.1" Tint="RGBA(0.500, 0.500, 1.000, 1.000)" />
+      <Vignette IsEnabled="False" IsRounded="False" Smoothness="0.2" Roundness="1" Intensity="0.45" />
+      <ChromaticAberration IsEnabled="False" Intensity="0.1" />
+      <Grain IsEnabled="False" IsColored="True" Intensity="0.5" LuminanceContribution="0.8" Size="1" />
+      <ThermalVision IsEnabled="False" />
+      <Blur IsEnabled="False" Intensity="0" />
+      <Pixelate Intensity="0" />
+      <Purkinje IsEnabled="False" ShiftAmount="1" Threshold="0.15" />
+      <ColorGrading Sharpen="0.2" Saturation="1" Daltonize="0" Contrast="1.1" Brightness="1" Shade="RGBA(1.000, 1.000, 1.000, 0.000)" Exposure="1" BlendAmount="0" LUT="" TonemappingMode="0" BlackIn="0.02" WhiteIn="10" BlackOut="0" WhiteOut="10" WhiteLevel="5.3" WhiteClip="10" PostExposure="0" Temperature="0" Tint="0" HueShift="0" Channel01="1,0,0" Channel02="0,1,0" Channel03="0,0,1" Lift="RGBA(0.000, 0.000, 0.000, 0.000)" Gamma="RGBA(1.000, 1.000, 1.000, 0.000)" Gain="RGBA(1.000, 1.000, 1.000, 0.000)" Slope="RGBA(1.000, 1.000, 1.000, 0.000)" Power="RGBA(1.000, 1.000, 1.000, 0.000)" Offset="RGBA(0.000, 0.000, 0.000, 0.000)" />
+      <DepthOfField IsEnabled="False" IsFocusLocked="False" IsVisualize="False" FarPlaneBlurRadius="20" FarPlaneFallOff="50" FocusPlane="20" NearPlaneBlurRadius="15" NearPlaneFallOff="15" Range="35" />
+      <Shadows Bias="0.64" Distance="4000" NearPlaneOffset="3" NormalBias="2" Strength="0.8" />
+      <Reflections Intensity="0.64" Metallic="0" Smoothness="0.2" TerrainBaseColor="RGBA(0.600, 0.600, 0.600, 1.000)" />
+      <Bloom IsEnabled="True" Intensity="1" Threshold="0.95" />
+      <HBAO IsEnabled="True" Intensity="0.64" Bias="0.05" DistanceFallOff="50" LuminanceInfluence="0" MaxDistance="150" MaxRadiusPixels="256" Radius="0.15" />
+      <SunFlares IsEnabled="False" Intensity="0.12" DiffractionIntensity="3.5" DiffractionThreashold="0.13" SunDiskSize="0.05" SolarWindSpeed="0.01" InnerCoronaLength="0.02" InnerCoronaStreaks="6" InnerCoronaSpread="0.04" OuterCoronaLength="0.05" OuterCoronaStreaks="12" OuterCoronaSpread="0.06" Tint="RGBA(1.000, 1.000, 1.000, 1.000)" />
+      <LensDirt IsEnabled="False" Intensity="0.9" Threshold="0.5" />
+      <EyeAdaption IsEnabled="True" MinExposure="0.2" MaxExposure="1" DarkAdaptSpeed="0.7" LightAdaptSpeed="1" />
+    </Render>
+  </Scene>
+  <Areas SkipFiltersOnTransform="False" SkipFiltersOnPaint="False" RawExportHeaderSize="0" RawExportStride="0" RawExportWidth="0" RawExportHeight="0" RawExportFlipX="False" RawExportFlipY="False" RawExportEndianSelection="0" RawExportBitDepthSelection="2" />
+  <Post>
+    <Simulation ShowWater="True" StepsPerFrame="1" HeightBlend="1" Viscosity="0.95" Evaporation="0" Strength="0" ShowClouds="False" CloudSpeed="0.02" CloudSize="0.15" CloudAmount="0.65" Area="0" SavedFluidData="False">
+      <Surface Name="Sediment Layer 1" Area="0" Height="0" Erosion="0:0:1:0" GroundwaterCapacity="0" GroundwaterEvaporation="0" GroundwaterAbsorption="0" MovementThreshold="5" MovementSmoothness="0.1" />
+      <Surface Name="Sediment Layer 2" Area="0" Height="1" Erosion="0:0:1:1" GroundwaterCapacity="0" GroundwaterEvaporation="0" GroundwaterAbsorption="0" MovementThreshold="0.1" MovementSmoothness="0.1" />
+      <Surface Name="Sediment Layer 3" Area="0" Height="1" Erosion="0:0:1:0.02" GroundwaterCapacity="0" GroundwaterEvaporation="0" GroundwaterAbsorption="0" MovementThreshold="0.1" MovementSmoothness="0.1" />
+      <Surface Name="Sediment Layer 4" Area="0" Height="2" Erosion="0:0.05:1:0.1" GroundwaterCapacity="0" GroundwaterEvaporation="0" GroundwaterAbsorption="0" MovementThreshold="0.1" MovementSmoothness="0.1" />
+    </Simulation>
+  </Post>
+  <Export>
+    <Surface IsInvertGreenChannel="False" IsInvertRedChannel="False" Normalize="False" IncludeBorder="True" Split="False" FlipX="False" FlipY="True" TileWidth="1024" TileHeight="1024" Quads="False" CutoffHeight="-50000:-100:50000:500" ResolutionIndexSelection="0" FormatHeightmapSelection="0" NormalizationTypeSelection="0" FormatNormalmapSelection="0" EndianSelection="0" BitDepthSelection="1" EngineSelection="2" HeightScaleSelection="0" TiffBitDepthSelection="0" ExportTypeSelection="0" />
+    <Textures ResolutionIndexSelection="1" FormatHeightmapSelection="0" Split="False" FlipX="False" FlipY="True" TileWidth="1024" TileHeight="1024" IncludeBorder="True" ReliefStrength="0.5" Brightness="1" Contrast="1" AORadius="0.05" AOSmoothness="0.1" AOBlur="0.5" />
+  </Export>
+</WorldCreator>
