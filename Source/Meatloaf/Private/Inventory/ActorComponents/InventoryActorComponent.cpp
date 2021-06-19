@@ -1,7 +1,6 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "Inventory/InventoryActorComponent.h"
+#include "Inventory/ActorComponents/InventoryActorComponent.h"
 
 
 // Sets default values for this component's properties

@@ -1,10 +1,7 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 
-#include "Inventory/Structs/Item.h"
 #include "Inventory/Structs/ItemStack.h"
 #include "UObject/Interface.h"
 #include "ItemContainer.generated.h"
@@ -24,38 +21,52 @@ class MEATLOAF_API IItemStackContainer
 	GENERATED_BODY()
 public:
 	/**
-	 * @brief Insert an item into this item container.
-	 * Any items that could not be inserted will be returned from this method as an ItemStack.
-	 * @param Item Item type to insert
-	 * @param Quantity Amount of items to insert
+	 * @brief Check if an item stack can be inserted into this item container without overflowing.
+	 * @param ItemStack Item stack to insert
+	 * @return True if stack there is enough space for items. False otherwise.
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
+	bool CanInsertItemStack(const FItemStack* ItemStack) const;
+	
+	/**
+	 * @brief Insert an item stack into this item container.
+	 * Any quantity of items that could not be inserted will be returned from this method as an ItemStack.
+	 * @param ItemStack Item stack to insert
 	 * @return Overflow item stack
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	FItemStack* InsertItem(FItem* Item, int Quantity);
+	FItemStack* InsertItemStack(const FItemStack* ItemStack);
 
 	/**
-	 * @brief Remove an item from this item container.
+	* @brief Check if an item stack can be removed from this item container in its entirety.
+	* @param ItemStack Item stack to insert
+	* @return True if there are enough items to remove. False otherwise.
+	*/
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
+	bool CanRemoveItemStack(const FItemStack* ItemStack) const;
+	
+	/**
+	 * @brief Remove an item stack from this item container.
 	 * Returns a stack representing the items removed.
 	 * If all items could not be removed, use the stack to compare what was removed.
-	 * @param Item Item type to remove
-	 * @param Quantity Amount of items to remove
+	 * @param ItemStack Item stack to insert
 	 * @return Items that were removed
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	FItemStack* RemoveItem(FItem* Item, int Quantity);
+	FItemStack* RemoveItemStack(const FItemStack* ItemStack);
 	
 	/**
-	 * @brief Get all items part of this item container.
+	 * @brief Get all item stacks part of this item container.
 	 * Returns a TArray of item stacks representing the items in the inventory.
 	 * @return All items
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	TArray<FItemStack*> GetAllItems() const;
+	TArray<FItemStack*> GetAllItemStacks() const;
 
 	/**
-	 * @brief Remove all items part of this item container
-	 * @return All items that were removed
+	 * @brief Remove all item stacks part of this item container
+	 * @return All item stacks that were removed
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	TArray<FItemStack*> RemoveAllItems();
+	TArray<FItemStack*> RemoveAllItemStacks();
 };

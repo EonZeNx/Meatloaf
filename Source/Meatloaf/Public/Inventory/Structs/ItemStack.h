@@ -24,4 +24,19 @@ struct MEATLOAF_API FItemStack
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Variables")
 	int Quantity;
+
+	FItemStack(const FItem Item, const int Quantity)
+	{
+		this->Item = Item;
+		this->Quantity = Quantity;
+	}
+
+	/**
+	 * @brief Makes a copy of this item stack
+	 * @return Copy of this ItemStack
+	 */
+	FItemStack* MakeCopy() const
+	{
+		return new FItemStack(this->Item, this->Quantity);
+	}
 };
