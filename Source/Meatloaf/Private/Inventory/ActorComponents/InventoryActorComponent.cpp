@@ -14,7 +14,6 @@ UInventoryActorComponent::UInventoryActorComponent()
 	Inventory = UBaseItemStackContainer::Make(40);
 }
 
-
 // Called when the game starts
 void UInventoryActorComponent::BeginPlay()
 {
@@ -24,7 +23,6 @@ void UInventoryActorComponent::BeginPlay()
 	
 }
 
-
 // Called every frame
 void UInventoryActorComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                              FActorComponentTickFunction* ThisTickFunction)
@@ -32,5 +30,50 @@ void UInventoryActorComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+FItemStack UInventoryActorComponent::GetItemStackAtIndex(const int Index) const
+{
+	return Inventory->GetItemStackAtIndex(Index);
+}
+
+void UInventoryActorComponent::SetItemStackAtIndex(const int Index, const FItemStack ItemStack)
+{
+	return Inventory->SetItemStackAtIndex(Index, ItemStack);
+}
+
+int UInventoryActorComponent::GetContainerSize() const
+{
+	return Inventory->GetContainerSize();
+}
+
+bool UInventoryActorComponent::CanInsertItemStack(const FItemStack ItemStack) const
+{
+	return Inventory->CanInsertItemStack(ItemStack);
+}
+
+FItemStack UInventoryActorComponent::InsertItemStack(const FItemStack ItemStack)
+{
+	return Inventory->InsertItemStack(ItemStack);
+}
+
+bool UInventoryActorComponent::CanRemoveItemStack(const FItemStack ItemStack) const
+{
+	return Inventory->CanRemoveItemStack(ItemStack);
+}
+
+FItemStack UInventoryActorComponent::RemoveItemStack(const FItemStack ItemStack)
+{
+	return Inventory->RemoveItemStack(ItemStack);
+}
+
+TArray<FItemStack> UInventoryActorComponent::GetAllItemStacks() const
+{
+	return Inventory->GetAllItemStacks();
+}
+
+TArray<FItemStack> UInventoryActorComponent::RemoveAllItemStacks()
+{
+	return Inventory->RemoveAllItemStacks();
 }
 
