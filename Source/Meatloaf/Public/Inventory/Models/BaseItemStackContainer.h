@@ -32,7 +32,7 @@ public:
 	 * @param Index Index of list
 	 * @return ItemStack
 	 */
-	UFUNCTION(BlueprintCallable, Category="Action")
+	UFUNCTION(BlueprintCallable, Category="Inventory Single Slot")
 	FItemStack GetItemStackAtIndex(const int Index) const;
 	
 	/**
@@ -40,16 +40,24 @@ public:
 	 * Index starts at 0. If index is out of range, return null.
 	 * @param Index Index of list
 	 */
-	UFUNCTION(BlueprintCallable, Category="Action")
+	UFUNCTION(BlueprintCallable, Category="Inventory Single Slot")
 	void SetItemStackAtIndex(const int Index, const FItemStack ItemStack);
 	
 	/**
 	 * @brief Get the size of the item list.
 	 * @return Total count of items
 	 */
-	UFUNCTION(BlueprintCallable, Category="Action")
+	UFUNCTION(BlueprintCallable, Category="Inventory Properties")
 	int GetContainerSize() const;
 
+	/**
+	 * @brief Swap two item stacks.
+	 * @param FirstIndex First item stack index
+	 * @param SecondIndex Second item stack index
+	 */
+	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
+	void SwapItemStacks(int FirstIndex, int SecondIndex);
+	
 	// IItemStackContainer implementation methods
 	/**
 	* @brief Check if an item stack can be inserted into this item container without overflowing.
@@ -99,7 +107,7 @@ private:
 	
 	/**
 	 * @brief Update the item slot. This should perform any cleanup actions needed,
-	 * i.e. making the slot into a nullptr if the quantity/durability is 0.
+	 * i.e. making the slot into a null item if the quantity/durability is 0.
 	 * @param Index Index of slot to update
 	 */
 	void UpdateItemSlot(const int Index);

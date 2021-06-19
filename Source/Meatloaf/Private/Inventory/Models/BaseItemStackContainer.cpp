@@ -31,6 +31,13 @@ int UBaseItemStackContainer::GetContainerSize() const
 	return this->MaxInventorySize;
 }
 
+void UBaseItemStackContainer::SwapItemStacks(int FirstIndex, int SecondIndex)
+{
+	const FItemStack TempItemStack = this->GetItemStackAtIndex(FirstIndex);
+	this->SetItemStackAtIndex(FirstIndex, this->GetItemStackAtIndex(SecondIndex));
+	this->SetItemStackAtIndex(SecondIndex, TempItemStack);
+}
+
 bool UBaseItemStackContainer::CanInsertItemStack_Implementation(const FItemStack ItemStack) const
 {
 	// Negative/zero quantity check
