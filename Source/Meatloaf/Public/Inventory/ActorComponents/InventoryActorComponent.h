@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/DataTable.h"
+#include "Inventory/Models/BaseItemStackContainer.h"
 
 #include "InventoryActorComponent.generated.h"
 
 /**
  * This component handles storage of items in a defined inventory.
  */
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable)
 class MEATLOAF_API UInventoryActorComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -22,6 +23,9 @@ public:
 	 */
 	UPROPERTY(EditAnywhere)
 	UDataTable* ItemDefinitions;
+
+	UPROPERTY(EditAnywhere)
+	UBaseItemStackContainer* Inventory;
 	
 	// Sets default values for this component's properties
 	UInventoryActorComponent();

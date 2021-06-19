@@ -25,6 +25,13 @@ struct MEATLOAF_API FItem : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Variables")
 	int MaxStackQuantity;
 
+	FItem()
+	{
+		this->Id = "null",
+		this->Name = "null",
+		this->MaxStackQuantity = 0;
+	}
+	
 	FItem(const FString Id, const FString Name, const int MaxStackQuantity) 
 	{
 		this->Id = Id;

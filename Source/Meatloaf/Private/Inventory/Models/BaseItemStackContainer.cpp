@@ -1,27 +1,27 @@
 ﻿#include "Inventory/Models/BaseItemStackContainer.h"
 
-UBaseItemStackContainer::UBaseItemStackContainer(int MaxInventorySize)
+void UBaseItemStackContainer::Init(const int Size)
 {
-	this->MaxInventorySize = MaxInventorySize;
-	this->ItemStacks.Init(nullptr, MaxInventorySize);
+	this->MaxInventorySize = Size;
+	this->ItemStacks.Init(FItemStack::Null(), Size);
 }
 
-FItemStack* UBaseItemStackContainer::GetItemStackAtIndex(const int Index) const
+FItemStack UBaseItemStackContainer::GetItemStackAtIndex(const int Index) const
 {
 	if(this->ItemStacks.IsValidIndex(Index))
 	{
 		return this->ItemStacks[Index];
 	}
-	return nullptr;
+	return FItemStack::Null();
 }
 
-void UBaseItemStackContainer::SetItemStackAtIndex(const int Index, const FItemStack* ItemStack)
+void UBaseItemStackContainer::SetItemStackAtIndex(const int Index, const FItemStack ItemStack)
 {
 	if(this->ItemStacks.IsValidIndex(Index))
 	{
-		FItemStack* NewItemStack = ItemStack->MakeCopy();
-		
+		const FItemStack NewItemStack = ItemStack.MakeCopy();
 		this->ItemStacks[Index] = NewItemStack;
+		UpdateItemSlot(Index);
 	}
 	// Else, do nothing.
 }
@@ -31,10 +31,10 @@ int UBaseItemStackContainer::GetContainerSize() const
 	return this->MaxInventorySize;
 }
 
-bool UBaseItemStackContainer::CanInsertItemStack_Implementation(const FItemStack* ItemStack) const
+bool UBaseItemStackContainer::CanInsertItemStack_Implementation(const FItemStack ItemStack) const
 {
 	// Negative/zero quantity check
-	if(ItemStack->Quantity <= 0)
+	if(ItemStack.Quantity <= 0)
 	{
 		return true;
 	}
@@ -43,16 +43,16 @@ bool UBaseItemStackContainer::CanInsertItemStack_Implementation(const FItemStack
 	int FreeSpaceForItem = 0;
 	for(int i = 0; i < MaxInventorySize; i++)
 	{
-		FItemStack* CurrentItemStack = ItemStacks[i];
-		if(CurrentItemStack == nullptr)
+		FItemStack CurrentItemStack = ItemStacks[i];
+		if(CurrentItemStack.IsNull())
 		{
-			FreeSpaceForItem += ItemStack->Item.MaxStackQuantity;
-		} else if(CurrentItemStack->Item.Id == ItemStack->Item.Id)
+			FreeSpaceForItem += ItemStack.Item.MaxStackQuantity;
+		} else if(CurrentItemStack.Item.Id == ItemStack.Item.Id)
 		{
-			FreeSpaceForItem += CurrentItemStack->Item.MaxStackQuantity - CurrentItemStack->Quantity;
+			FreeSpaceForItem += CurrentItemStack.Item.MaxStackQuantity - CurrentItemStack.Quantity;
 		}
 
-		if(FreeSpaceForItem >= ItemStack->Quantity)
+		if(FreeSpaceForItem >= ItemStack.Quantity)
 		{
 			// At this point we know that there is enough room for whole stack
 			return true;
@@ -63,65 +63,67 @@ bool UBaseItemStackContainer::CanInsertItemStack_Implementation(const FItemStack
 	return false;
 }
 
-FItemStack* UBaseItemStackContainer::InsertItemStack_Implementation(const FItemStack* ItemStack)
+FItemStack UBaseItemStackContainer::InsertItemStack_Implementation(const FItemStack ItemStack)
 {
 	// Negative/zero quantity check
-	if(ItemStack->Quantity <= 0)
+	if(ItemStack.Quantity <= 0)
 	{
-		return nullptr;
+		return FItemStack::Null();
 	}
 
 	// Loop item stack insertion
-	int QuantityToAdd = ItemStack->Quantity;
+	int QuantityToAdd = ItemStack.Quantity;
 	for(int i = 0; i < MaxInventorySize; i++)
 	{
-		FItemStack* CurrentItemStack = ItemStacks[i];
-		if(CurrentItemStack == nullptr)
+		FItemStack CurrentItemStack = ItemStacks[i];
+		if(CurrentItemStack.IsNull())
 		{
-			CurrentItemStack->Item = ItemStack->Item;
+			CurrentItemStack.Item = ItemStack.Item;
 		} 
-		if(CurrentItemStack->Item.Id == ItemStack->Item.Id)
+		if(CurrentItemStack.Item.Id == ItemStack.Item.Id)
 		{
 			// Try to insert into slot, scrape off the overflow and set TempItemStack quantity to overflow
-			CurrentItemStack->Quantity += QuantityToAdd;
-			QuantityToAdd = CurrentItemStack->Quantity - CurrentItemStack->Item.MaxStackQuantity;
+			CurrentItemStack.Quantity += QuantityToAdd;
+			QuantityToAdd = CurrentItemStack.Quantity - CurrentItemStack.Item.MaxStackQuantity;
 			if(QuantityToAdd <= 0)
 			{
-				return nullptr;
+				UpdateItemSlot(i);
+				return FItemStack::Null();
 			}
-			CurrentItemStack->Quantity -= QuantityToAdd; // Scrape off overflow
+			CurrentItemStack.Quantity -= QuantityToAdd; // Scrape off overflow
+			UpdateItemSlot(i);
 		}
 	}
 
 	// Negative/zero quantity check
 	if(QuantityToAdd <= 0)
 	{
-		return nullptr;
+		return FItemStack::Null();
 	}
 
 	// Create stack containing overflow quantity
-	FItemStack* OverflowItemStack = ItemStack->MakeCopy(); 
-	OverflowItemStack->Quantity = QuantityToAdd;
+	FItemStack OverflowItemStack = ItemStack.MakeCopy(); 
+	OverflowItemStack.Quantity = QuantityToAdd;
 	return OverflowItemStack;
 }
 
-bool UBaseItemStackContainer::CanRemoveItemStack_Implementation(const FItemStack* ItemStack) const
+bool UBaseItemStackContainer::CanRemoveItemStack_Implementation(const FItemStack ItemStack) const
 {
 	// Negative/zero quantity check
-	if(ItemStack->Quantity <= 0)
+	if(ItemStack.Quantity <= 0)
 	{
-		return nullptr;
+		return true;
 	}
 
 	// Count all items of same type
 	int Quantity = 0;
 	for(int i = 0; i < MaxInventorySize; i++)
 	{
-		FItemStack* CurrentItemStack = ItemStacks[i];
-		if(CurrentItemStack->Item.Id == ItemStack->Item.Id)
+		FItemStack CurrentItemStack = ItemStacks[i];
+		if(CurrentItemStack.Item.Id == ItemStack.Item.Id)
 		{
-			Quantity += CurrentItemStack->Quantity;
-			if(Quantity >= ItemStack->Quantity)
+			Quantity += CurrentItemStack.Quantity;
+			if(Quantity >= ItemStack.Quantity)
 			{
 				// We know at this point that enough items of this type exist in the inventory.
 				return true;
@@ -131,55 +133,57 @@ bool UBaseItemStackContainer::CanRemoveItemStack_Implementation(const FItemStack
 	return false;
 }
 
-FItemStack* UBaseItemStackContainer::RemoveItemStack_Implementation(const FItemStack* ItemStack)
+FItemStack UBaseItemStackContainer::RemoveItemStack_Implementation(const FItemStack ItemStack)
 {
 	// Negative/zero quantity check
-	if(ItemStack->Quantity <= 0)
+	if(ItemStack.Quantity <= 0)
 	{
-		return nullptr;
+		return FItemStack::Null();
 	}
 
 	// Loop item stack insertion
-	int QuantityToRemove = ItemStack->Quantity;
+	int QuantityToRemove = ItemStack.Quantity;
 	for(int i = 0; i < MaxInventorySize; i++)
 	{
-		FItemStack* CurrentItemStack = ItemStacks[i];
-		if(CurrentItemStack->Item.Id == ItemStack->Item.Id)
+		FItemStack CurrentItemStack = ItemStacks[i];
+		if(CurrentItemStack.Item.Id == ItemStack.Item.Id)
 		{
 			// Try to remove from slot
-			CurrentItemStack->Quantity -= QuantityToRemove;
-			QuantityToRemove = -CurrentItemStack->Quantity;
+			CurrentItemStack.Quantity -= QuantityToRemove;
+			QuantityToRemove = -CurrentItemStack.Quantity;
 			if(QuantityToRemove <= 0)
 			{
-				return nullptr;
+				UpdateItemSlot(i);
+				return FItemStack::Null();
 			}
-			CurrentItemStack->Quantity = 0; // Normalize item stack quantity, since it is negative
+			CurrentItemStack.Quantity = 0; // Normalize item stack quantity, since it is negative
+			UpdateItemSlot(i);
 		}
 	}
 
 	// Negative/zero quantity check
 	if(QuantityToRemove <= 0)
 	{
-		return nullptr;
+		return FItemStack::Null();
 	}
 
 	// Create stack containing overflow quantity
-	FItemStack* OverflowItemStack = ItemStack->MakeCopy(); 
-	OverflowItemStack->Quantity = QuantityToRemove;
+	FItemStack OverflowItemStack = ItemStack.MakeCopy(); 
+	OverflowItemStack.Quantity = QuantityToRemove;
 	return OverflowItemStack;
 }
 
-TArray<FItemStack*> UBaseItemStackContainer::GetAllItemStacks_Implementation() const
+TArray<FItemStack> UBaseItemStackContainer::GetAllItemStacks_Implementation() const
 {
 	return ItemStacks;
 }
 
-TArray<FItemStack*> UBaseItemStackContainer::RemoveAllItemStacks_Implementation()
+TArray<FItemStack> UBaseItemStackContainer::RemoveAllItemStacks_Implementation()
 {
-	TArray<FItemStack*> ItemStacksCopy = ItemStacks;
+	TArray<FItemStack> ItemStacksCopy = ItemStacks;
 	for(int i = 0; i < MaxInventorySize; i++) // Set all stacks to null
 	{
-		ItemStacks[i] = nullptr; 
+		ItemStacks[i] = FItemStack::Null(); 
 	}
 	return ItemStacksCopy;
 }
@@ -187,10 +191,17 @@ TArray<FItemStack*> UBaseItemStackContainer::RemoveAllItemStacks_Implementation(
 void UBaseItemStackContainer::UpdateItemSlot(const int Index)
 {
 	// If item has a quantity of zero, slot should now be nullptr.
-	FItemStack* ItemStack = this->GetItemStackAtIndex(Index);
-	if(ItemStack != nullptr && ItemStack->Quantity == 0)
+	const FItemStack ItemStack = this->GetItemStackAtIndex(Index);
+	if(ItemStack.Quantity == 0)
 	{
-		ItemStacks[Index] = nullptr;
+		ItemStacks[Index] = FItemStack::Null();
 	}
+}
+
+UBaseItemStackContainer* UBaseItemStackContainer::Make(const int MaxInventorySize)
+{
+	UBaseItemStackContainer* NewContainer = NewObject<UBaseItemStackContainer>();
+	NewContainer->Init(MaxInventorySize);
+	return NewContainer;
 }
 

@@ -19,11 +19,11 @@ class MEATLOAF_API UBaseItemStackContainer : public UObject, public IItemStackCo
 
 	// Private variables
 	int MaxInventorySize;
-	TArray<FItemStack*> ItemStacks;
+	TArray<FItemStack> ItemStacks;
 	
 public:
 	// Init
-	explicit UBaseItemStackContainer(int MaxInventorySize);
+	void Init(const int Size);
 
 	// Methods
 	/**
@@ -32,20 +32,22 @@ public:
 	 * @param Index Index of list
 	 * @return ItemStack
 	 */
-	FItemStack* GetItemStackAtIndex(const int Index) const;
-
+	UFUNCTION(BlueprintCallable, Category="Action")
+	FItemStack GetItemStackAtIndex(const int Index) const;
 	
 	/**
 	 * @brief Set an item stack at index.
 	 * Index starts at 0. If index is out of range, return null.
 	 * @param Index Index of list
 	 */
-	void SetItemStackAtIndex(const int Index, const FItemStack* ItemStack);
+	UFUNCTION(BlueprintCallable, Category="Action")
+	void SetItemStackAtIndex(const int Index, const FItemStack ItemStack);
 	
 	/**
 	 * @brief Get the size of the item list.
 	 * @return Total count of items
 	 */
+	UFUNCTION(BlueprintCallable, Category="Action")
 	int GetContainerSize() const;
 
 	// IItemStackContainer implementation methods
@@ -54,7 +56,7 @@ public:
 	* @param ItemStack Item stack to insert
 	* @return True if stack there is enough space for items. False otherwise.
 	*/
-	virtual bool CanInsertItemStack_Implementation(const FItemStack* ItemStack) const override;
+	virtual bool CanInsertItemStack_Implementation(const FItemStack ItemStack) const override;
 
 	/**
 	* @brief Insert an item stack into this item container.
@@ -62,14 +64,14 @@ public:
 	* @param ItemStack Item stack to insert
 	* @return Overflow item stack
 	*/
-	virtual FItemStack* InsertItemStack_Implementation(const FItemStack* ItemStack) override;
+	virtual FItemStack InsertItemStack_Implementation(const FItemStack ItemStack) override;
 
 	/**
 	* @brief Check if an item stack can be removed from this item container in its entirety.
 	* @param ItemStack Item stack to insert
 	* @return True if there are enough items to remove. False otherwise.
 	*/
-	virtual bool CanRemoveItemStack_Implementation(const FItemStack* ItemStack) const override;
+	virtual bool CanRemoveItemStack_Implementation(const FItemStack ItemStack) const override;
 
 	/**
 	* @brief Remove an item stack from this item container.
@@ -78,20 +80,20 @@ public:
 	* @param ItemStack Item stack to insert
 	* @return Items that were removed
 	*/
-	virtual FItemStack* RemoveItemStack_Implementation(const FItemStack* ItemStack) override;
+	virtual FItemStack RemoveItemStack_Implementation(const FItemStack ItemStack) override;
 
 	/**
 	* @brief Get all item stacks part of this item container.
 	* Returns a TArray of item stacks representing the items in the inventory.
 	* @return All items
 	*/
-	virtual TArray<FItemStack*> GetAllItemStacks_Implementation() const override;
+	virtual TArray<FItemStack> GetAllItemStacks_Implementation() const override;
 
 	/**
 	* @brief Remove all item stacks part of this item container
 	* @return All item stacks that were removed
 	*/
-	virtual TArray<FItemStack*> RemoveAllItemStacks_Implementation() override;
+	virtual TArray<FItemStack> RemoveAllItemStacks_Implementation() override;
 
 private:
 	
@@ -101,4 +103,7 @@ private:
 	 * @param Index Index of slot to update
 	 */
 	void UpdateItemSlot(const int Index);
+
+public:
+	static UBaseItemStackContainer* Make(const int MaxInventorySize);
 };

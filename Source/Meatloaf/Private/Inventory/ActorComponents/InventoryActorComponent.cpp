@@ -10,7 +10,8 @@ UInventoryActorComponent::UInventoryActorComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	// Initialize inventory
+	Inventory = UBaseItemStackContainer::Make(40);
 }
 
 

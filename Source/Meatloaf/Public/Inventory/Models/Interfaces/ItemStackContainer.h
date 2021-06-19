@@ -4,7 +4,7 @@
 
 #include "Inventory/Structs/ItemStack.h"
 #include "UObject/Interface.h"
-#include "ItemContainer.generated.h"
+#include "ItemStackContainer.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE()
@@ -26,7 +26,7 @@ public:
 	 * @return True if stack there is enough space for items. False otherwise.
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	bool CanInsertItemStack(const FItemStack* ItemStack) const;
+	bool CanInsertItemStack(const FItemStack ItemStack) const;
 	
 	/**
 	 * @brief Insert an item stack into this item container.
@@ -35,7 +35,7 @@ public:
 	 * @return Overflow item stack
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	FItemStack* InsertItemStack(const FItemStack* ItemStack);
+	FItemStack InsertItemStack(const FItemStack ItemStack);
 
 	/**
 	* @brief Check if an item stack can be removed from this item container in its entirety.
@@ -43,7 +43,7 @@ public:
 	* @return True if there are enough items to remove. False otherwise.
 	*/
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	bool CanRemoveItemStack(const FItemStack* ItemStack) const;
+	bool CanRemoveItemStack(const FItemStack ItemStack) const;
 	
 	/**
 	 * @brief Remove an item stack from this item container.
@@ -53,7 +53,7 @@ public:
 	 * @return Items that were removed
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	FItemStack* RemoveItemStack(const FItemStack* ItemStack);
+	FItemStack RemoveItemStack(const FItemStack ItemStack);
 	
 	/**
 	 * @brief Get all item stacks part of this item container.
@@ -61,12 +61,12 @@ public:
 	 * @return All items
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	TArray<FItemStack*> GetAllItemStacks() const;
+	TArray<FItemStack> GetAllItemStacks() const;
 
 	/**
 	 * @brief Remove all item stacks part of this item container
 	 * @return All item stacks that were removed
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Action")
-	TArray<FItemStack*> RemoveAllItemStacks();
+	TArray<FItemStack> RemoveAllItemStacks();
 };

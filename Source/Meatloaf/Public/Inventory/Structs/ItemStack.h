@@ -25,6 +25,12 @@ struct MEATLOAF_API FItemStack
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Variables")
 	int Quantity;
 
+	FItemStack()
+	{
+		this->Item = FItem();
+		this->Quantity = 0;
+	}
+	
 	FItemStack(const FItem Item, const int Quantity)
 	{
 		this->Item = Item;
@@ -35,8 +41,26 @@ struct MEATLOAF_API FItemStack
 	 * @brief Makes a copy of this item stack
 	 * @return Copy of this ItemStack
 	 */
-	FItemStack* MakeCopy() const
+	FItemStack MakeCopy() const
 	{
-		return new FItemStack(this->Item, this->Quantity);
+		return FItemStack(this->Item, this->Quantity);
+	}
+
+	/**
+	 * @brief Check if this item stack is considered a null stack.
+	 * @return True if this is a null stack (empty quantity). False otherwise.
+	 */
+	bool IsNull() const
+	{
+		return Item.Id == "null" || Quantity == 0;
+	}
+
+	/**
+	 * @brief Create an item stack that would considered to represent "null".
+	 * @return Null item stack.
+	 */
+	static FItemStack Null()
+	{
+		return FItemStack();
 	}
 };
