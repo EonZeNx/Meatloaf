@@ -47,6 +47,11 @@ int UInventoryActorComponent::GetContainerSize() const
 	return Inventory->GetContainerSize();
 }
 
+void UInventoryActorComponent::SwapItemStacks(const int FirstIndex, const int SecondIndex)
+{
+	return Inventory->SwapItemStacks(FirstIndex, SecondIndex);
+}
+
 bool UInventoryActorComponent::CanInsertItemStack(const FItemStack ItemStack) const
 {
 	return Inventory->CanInsertItemStack(ItemStack);

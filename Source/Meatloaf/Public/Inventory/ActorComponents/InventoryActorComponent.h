@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/DataTable.h"
+#include "Interfaces/InventoryInterface.h"
 #include "Inventory/Models/BaseItemStackContainer.h"
 
 #include "InventoryActorComponent.generated.h"
@@ -14,19 +15,23 @@
  * TODO: Make this implement an interface.
  */
 UCLASS(Blueprintable)
-class MEATLOAF_API UInventoryActorComponent : public UActorComponent
+class MEATLOAF_API UInventoryActorComponent : public UActorComponent, public IInventoryInterface
 {
 	GENERATED_BODY()
 
+private:
+	/**
+	 * @brief This will keep track of the inventory's contents.
+	 */
+	UPROPERTY(EditAnywhere)
+	UBaseItemStackContainer* Inventory;
+	
 public:
 	/**
 	 * @brief Populate this in blueprints, it contains a definition of all valid items
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Definitions")
 	UDataTable* ItemDefinitions;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Inventory")
-	UBaseItemStackContainer* Inventory;
 	
 	// Sets default values for this component's properties
 	UInventoryActorComponent();
@@ -49,6 +54,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Inventory Properties")
 	int GetContainerSize() const;
 
+	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
+	void SwapItemStacks(const int FirstIndex, const int SecondIndex);
+	
 	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
 	bool CanInsertItemStack(const FItemStack ItemStack) const;
 

@@ -31,7 +31,7 @@ int UBaseItemStackContainer::GetContainerSize() const
 	return this->MaxInventorySize;
 }
 
-void UBaseItemStackContainer::SwapItemStacks(int FirstIndex, int SecondIndex)
+void UBaseItemStackContainer::SwapItemStacks(const int FirstIndex, const int SecondIndex)
 {
 	const FItemStack TempItemStack = this->GetItemStackAtIndex(FirstIndex);
 	this->SetItemStackAtIndex(FirstIndex, this->GetItemStackAtIndex(SecondIndex));

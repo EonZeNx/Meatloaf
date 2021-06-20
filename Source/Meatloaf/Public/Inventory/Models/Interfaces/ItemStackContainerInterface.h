@@ -4,11 +4,11 @@
 
 #include "Inventory/Structs/ItemStack.h"
 #include "UObject/Interface.h"
-#include "ItemStackContainer.generated.h"
+#include "ItemStackContainerInterface.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE()
-class UItemStackContainer : public UInterface
+class UItemStackContainerInterface : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,7 +16,7 @@ class UItemStackContainer : public UInterface
 /**
  * Implemented by classes which hold and manage a collection of item stacks.
  */
-class MEATLOAF_API IItemStackContainer
+class MEATLOAF_API IItemStackContainerInterface
 {
 	GENERATED_BODY()
 public:

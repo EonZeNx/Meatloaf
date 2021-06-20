@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 
-#include "Interfaces/ItemStackContainer.h"
+#include "Interfaces/ItemStackContainerInterface.h"
 #include "UObject/Object.h"
 #include "BaseItemStackContainer.generated.h"
 
 /**
  * A basic item stack container implementation that holds items in a basic list.
- * Any nullptrs in the list will be treated as empty slots.
+ * Any item stacks that store the item "null" in the list will be treated as empty slots.
  */
 UCLASS()
-class MEATLOAF_API UBaseItemStackContainer : public UObject, public IItemStackContainer
+class MEATLOAF_API UBaseItemStackContainer : public UObject, public IItemStackContainerInterface
 {
 	GENERATED_BODY()
 
@@ -56,7 +56,7 @@ public:
 	 * @param SecondIndex Second item stack index
 	 */
 	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
-	void SwapItemStacks(int FirstIndex, int SecondIndex);
+	void SwapItemStacks(const int FirstIndex, const int SecondIndex);
 	
 	// IItemStackContainer implementation methods
 	/**
@@ -113,5 +113,8 @@ private:
 	void UpdateItemSlot(const int Index);
 
 public:
+	/**
+	 * Create a UBaseItemStackContainer and initialize it.
+	 */
 	static UBaseItemStackContainer* Make(const int MaxInventorySize);
 };
