@@ -11,8 +11,7 @@
 #include "BaseInventoryActorComponent.generated.h"
 
 /**
- * This component handles storage of items in a defined inventory.
- * TODO: Make this implement an interface.
+ * This component handles storage of items in a defined basic list-based inventory.
  */
 UCLASS(Blueprintable)
 class MEATLOAF_API UBaseInventoryActorComponent : public UActorComponent, public IInventoryActorComponentInterface
