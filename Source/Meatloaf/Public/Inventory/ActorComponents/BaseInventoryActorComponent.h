@@ -7,7 +7,7 @@
 #include "Engine/DataTable.h"
 #include "Interfaces/InventoryActorComponentInterface.h"
 #include "Inventory/Models/BaseItemStackContainer.h"
-
+#include "Inventory/Models/Structs/ItemStack.h"
 #include "BaseInventoryActorComponent.generated.h"
 
 /**

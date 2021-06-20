@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 
-#include "Inventory/Structs/ItemStack.h"
+#include "Inventory/Models/Structs/ItemStack.h"
 #include "UObject/Interface.h"
 #include "ItemStackContainerInterface.generated.h"
 
