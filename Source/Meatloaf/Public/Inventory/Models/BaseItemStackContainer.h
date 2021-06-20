@@ -32,7 +32,7 @@ public:
 	 * @param Index Index of list
 	 * @return ItemStack
 	 */
-	UFUNCTION(BlueprintCallable, Category="Inventory Single Slot")
+	UFUNCTION(BlueprintCallable, Category="Item Stack Container Single Slot")
 	FItemStack GetItemStackAtIndex(const int Index) const;
 	
 	/**
@@ -40,14 +40,14 @@ public:
 	 * Index starts at 0. If index is out of range, return null.
 	 * @param Index Index of list
 	 */
-	UFUNCTION(BlueprintCallable, Category="Inventory Single Slot")
+	UFUNCTION(BlueprintCallable, Category="Item Stack Container Single Slot")
 	void SetItemStackAtIndex(const int Index, const FItemStack ItemStack);
 	
 	/**
 	 * @brief Get the size of the item list.
 	 * @return Total count of items
 	 */
-	UFUNCTION(BlueprintCallable, Category="Inventory Properties")
+	UFUNCTION(BlueprintCallable, Category="Item Stack Container Properties")
 	int GetContainerSize() const;
 
 	/**
@@ -55,7 +55,7 @@ public:
 	 * @param FirstIndex First item stack index
 	 * @param SecondIndex Second item stack index
 	 */
-	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
+	UFUNCTION(BlueprintCallable, Category="Item Stack Container Actions")
 	void SwapItemStacks(const int FirstIndex, const int SecondIndex);
 	
 	// IItemStackContainer implementation methods

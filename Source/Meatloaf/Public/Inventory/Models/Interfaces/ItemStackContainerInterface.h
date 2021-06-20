@@ -25,7 +25,7 @@ public:
 	 * @param ItemStack Item stack to insert
 	 * @return True if stack there is enough space for items. False otherwise.
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Inventory Actions")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Item Stack Container Checks")
 	bool CanInsertItemStack(const FItemStack ItemStack) const;
 	
 	/**
@@ -34,7 +34,7 @@ public:
 	 * @param ItemStack Item stack to insert
 	 * @return Overflow item stack
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Inventory Actions")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Item Stack Container Actions")
 	FItemStack InsertItemStack(const FItemStack ItemStack);
 
 	/**
@@ -42,7 +42,7 @@ public:
 	* @param ItemStack Item stack to insert
 	* @return True if there are enough items to remove. False otherwise.
 	*/
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Inventory Actions")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Item Stack Container Checks")
 	bool CanRemoveItemStack(const FItemStack ItemStack) const;
 	
 	/**
@@ -52,7 +52,7 @@ public:
 	 * @param ItemStack Item stack to insert
 	 * @return Items that were removed
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Inventory Actions")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Item Stack Container Actions")
 	FItemStack RemoveItemStack(const FItemStack ItemStack);
 	
 	/**
@@ -60,13 +60,13 @@ public:
 	 * Returns a TArray of item stacks representing the items in the inventory.
 	 * @return All items
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Inventory All Slots")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Item Stack Container All Slots")
 	TArray<FItemStack> GetAllItemStacks() const;
 
 	/**
 	 * @brief Remove all item stacks part of this item container
 	 * @return All item stacks that were removed
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Inventory All Slots")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Item Stack Container All Slots")
 	TArray<FItemStack> RemoveAllItemStacks();
 };

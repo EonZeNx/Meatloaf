@@ -58,20 +58,20 @@ public:
 	void SwapItemStacks(const int FirstIndex, const int SecondIndex);
 	
 	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
-	bool CanInsertItemStack(const FItemStack ItemStack) const;
+	virtual bool CanInsertItemStack_Implementation(const FItemStack ItemStack) const override;
 
 	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
-	FItemStack InsertItemStack(const FItemStack ItemStack);
+	virtual FItemStack InsertItemStack_Implementation(const FItemStack ItemStack) override;
 
 	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
-	bool CanRemoveItemStack(const FItemStack ItemStack) const;
+	virtual bool CanRemoveItemStack_Implementation(const FItemStack ItemStack) const override;
 
 	UFUNCTION(BlueprintCallable, Category="Inventory Actions")
-	FItemStack RemoveItemStack(const FItemStack ItemStack);
+	virtual FItemStack RemoveItemStack_Implementation(const FItemStack ItemStack) override;
 
 	UFUNCTION(BlueprintCallable, Category="Inventory All Slots")
-	TArray<FItemStack> GetAllItemStacks() const;
+	virtual TArray<FItemStack> GetAllItemStacks_Implementation() const override;
 
 	UFUNCTION(BlueprintCallable, Category="Inventory All Slots")
-	TArray<FItemStack> RemoveAllItemStacks();
+	virtual TArray<FItemStack> RemoveAllItemStacks_Implementation() override;
 };

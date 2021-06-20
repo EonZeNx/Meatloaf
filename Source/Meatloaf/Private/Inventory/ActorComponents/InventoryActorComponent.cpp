@@ -52,32 +52,32 @@ void UInventoryActorComponent::SwapItemStacks(const int FirstIndex, const int Se
 	return Inventory->SwapItemStacks(FirstIndex, SecondIndex);
 }
 
-bool UInventoryActorComponent::CanInsertItemStack(const FItemStack ItemStack) const
+bool UInventoryActorComponent::CanInsertItemStack_Implementation(const FItemStack ItemStack) const
 {
 	return Inventory->CanInsertItemStack(ItemStack);
 }
 
-FItemStack UInventoryActorComponent::InsertItemStack(const FItemStack ItemStack)
+FItemStack UInventoryActorComponent::InsertItemStack_Implementation(const FItemStack ItemStack)
 {
 	return Inventory->InsertItemStack(ItemStack);
 }
 
-bool UInventoryActorComponent::CanRemoveItemStack(const FItemStack ItemStack) const
+bool UInventoryActorComponent::CanRemoveItemStack_Implementation(const FItemStack ItemStack) const
 {
 	return Inventory->CanRemoveItemStack(ItemStack);
 }
 
-FItemStack UInventoryActorComponent::RemoveItemStack(const FItemStack ItemStack)
+FItemStack UInventoryActorComponent::RemoveItemStack_Implementation(const FItemStack ItemStack)
 {
 	return Inventory->RemoveItemStack(ItemStack);
 }
 
-TArray<FItemStack> UInventoryActorComponent::GetAllItemStacks() const
+TArray<FItemStack> UInventoryActorComponent::GetAllItemStacks_Implementation() const
 {
 	return Inventory->GetAllItemStacks();
 }
 
-TArray<FItemStack> UInventoryActorComponent::RemoveAllItemStacks()
+TArray<FItemStack> UInventoryActorComponent::RemoveAllItemStacks_Implementation()
 {
 	return Inventory->RemoveAllItemStacks();
 }
