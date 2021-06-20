@@ -6,11 +6,11 @@
 
 #include "Inventory/Structs/ItemStack.h"
 #include "UObject/Interface.h"
-#include "InventoryInterface.generated.h"
+#include "InventoryActorComponentInterface.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE()
-class UInventoryInterface : public UInterface
+class UInventoryActorComponentInterface : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -18,7 +18,7 @@ class UInventoryInterface : public UInterface
 /**
  * 
  */
-class MEATLOAF_API IInventoryInterface
+class MEATLOAF_API IInventoryActorComponentInterface
 {
 	GENERATED_BODY()
 

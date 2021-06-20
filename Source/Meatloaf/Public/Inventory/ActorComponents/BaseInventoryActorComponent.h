@@ -5,17 +5,17 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Engine/DataTable.h"
-#include "Interfaces/InventoryInterface.h"
+#include "Interfaces/InventoryActorComponentInterface.h"
 #include "Inventory/Models/BaseItemStackContainer.h"
 
-#include "InventoryActorComponent.generated.h"
+#include "BaseInventoryActorComponent.generated.h"
 
 /**
  * This component handles storage of items in a defined inventory.
  * TODO: Make this implement an interface.
  */
 UCLASS(Blueprintable)
-class MEATLOAF_API UInventoryActorComponent : public UActorComponent, public IInventoryInterface
+class MEATLOAF_API UBaseInventoryActorComponent : public UActorComponent, public IInventoryActorComponentInterface
 {
 	GENERATED_BODY()
 
@@ -34,7 +34,7 @@ public:
 	UDataTable* ItemDefinitions;
 	
 	// Sets default values for this component's properties
-	UInventoryActorComponent();
+	UBaseInventoryActorComponent();
 
 protected:
 	// Called when the game starts
