@@ -3,6 +3,11 @@
 
 #include "Characters/EntityCharacter.h"
 
+#include "GAS/GAS_AbilitySystemComponent.h"
+#include "GAS/GAS_GameplayAbility.h"
+#include "GAS/GAS_AttributeSet.h"
+#include "GameplayEffectTypes.h"
+
 
 // Sets default values
 AEntityCharacter::AEntityCharacter()
@@ -40,6 +45,13 @@ AEntityCharacter::AEntityCharacter()
 	JumpScalar = 750.f;
 	MaxAirJumps = 1;
 	CurrentAirJumps = 0;
+
+	/* GAS */
+	ASC = CreateDefaultSubobject<UGAS_AbilitySystemComponent>("ASC");
+	ASC->SetIsReplicated(true);
+	ASC->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
+	Attributes = CreateDefaultSubobject<UGAS_AttributeSet>("Attributes");
 }
 
 // Called when the game starts or when spawned
@@ -59,11 +71,50 @@ void AEntityCharacter::Tick(float DeltaTime)
 void AEntityCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	// May get called in an init state where one is not setup yet.
+	if (ASC && InputComponent)
+	{
+		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "EGasAbilityInputID",
+            static_cast<int32>(EGasAbilityInputID::Confirm),
+            static_cast<int32>(EGasAbilityInputID::Cancel));
+		
+		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
+	}
 }
 
 void AEntityCharacter::Landed(const FHitResult& Hit)
 {
 	CurrentAirJumps = 0;
+}
+
+void AEntityCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	// Server GAS init
+	// ASC->InitAbilityActorInfo(this, this);
+	ASC->InitAbilityActorInfo(NewController, this);
+
+	InitAttributes();
+	GiveAbilities();
+}
+
+void AEntityCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	ASC->InitAbilityActorInfo(this, this);
+	InitAttributes();
+
+	if (ASC && InputComponent)
+	{
+		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "EGasAbilityInputID",
+			static_cast<int32>(EGasAbilityInputID::Confirm),
+			static_cast<int32>(EGasAbilityInputID::Cancel));
+		
+		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
+	}
 }
 
 
@@ -152,4 +203,38 @@ void AEntityCharacter::StopCrouch_Implementation()
 	CurrentCrouchTransitionTime = CrouchTransitionTime;
 	bIsCrouching = false;
 	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+}
+
+/* GAS */
+class UAbilitySystemComponent* AEntityCharacter::GetAbilitySystemComponent() const
+{
+	return ASC;
+}
+
+void AEntityCharacter::InitAttributes()
+{
+	if (ASC && DefaultAttributeEffect)
+	{
+		FGameplayEffectContextHandle EffectContext = ASC->MakeEffectContext();
+		EffectContext.AddSourceObject(this);
+
+		FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(DefaultAttributeEffect, 1, EffectContext);
+
+		if (SpecHandle.IsValid())
+		{
+			FActiveGameplayEffectHandle GEHandle = ASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+		}
+	}
+}
+
+void AEntityCharacter::GiveAbilities()
+{
+	// if (HasAuthority() && ASC) { }
+	if (!HasAuthority() || !ASC) return;
+
+	for(TSubclassOf<UGAS_GameplayAbility>& StartupAbility : DefaultAbilities)
+	{
+		ASC->GiveAbility(
+			FGameplayAbilitySpec(StartupAbility, 1, static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID), this));
+	}
 }

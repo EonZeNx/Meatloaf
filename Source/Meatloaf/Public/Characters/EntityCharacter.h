@@ -5,17 +5,34 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/BasicMovement.h"
+#include "AbilitySystemInterface.h"
+#include "GameplayEffectTypes.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GAS/GAS_AbilitySystemComponent.h"
+#include "GAS/GAS_AttributeSet.h"
 
 #include "EntityCharacter.generated.h"
 
 UCLASS()
-class MEATLOAF_API AEntityCharacter : public ACharacter, public IBasicMovement
+class MEATLOAF_API AEntityCharacter : public ACharacter, public IBasicMovement, public IAbilitySystemInterface
 {
+private:
 	GENERATED_BODY()
 
 	/** VARIABLES **/
 public:
+	/* GAS */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="GAS")
+	class UGAS_AbilitySystemComponent* ASC;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="GAS")
+	class UGAS_AttributeSet* Attributes;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="GAS")
+	TSubclassOf<class UGameplayEffect> DefaultAttributeEffect;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="GAS")
+	TArray<TSubclassOf<class UGAS_GameplayAbility>> DefaultAbilities;
 protected:
 	/** References. **/
 	/* A reference to the owners' movement component. */
@@ -82,12 +99,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	// Required to use the Ability System Component
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+protected:
+
+	virtual void BeginPlay() override;
 	virtual void Landed(const FHitResult& Hit) override;
-	
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
+	// Basic Movement implementations
 	UFUNCTION(BlueprintCallable)
     virtual void MoveForBack_Implementation(float value) override;
 	UFUNCTION(BlueprintCallable)
@@ -111,5 +133,9 @@ protected:
     virtual void StartCrouch_Implementation() override;
 	UFUNCTION(BlueprintCallable)
     virtual void StopCrouch_Implementation() override;
+	
 private:
+	/* Ability System Component */
+	virtual void InitAttributes();
+	virtual void GiveAbilities();
 };
