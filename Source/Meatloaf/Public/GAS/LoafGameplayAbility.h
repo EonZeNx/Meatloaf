@@ -4,23 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
-#include "Data/GAS_States.h"
+#include "Data/LoafGasStates.h"
 
-#include "GAS_GameplayAbility.generated.h"
+#include "LoafGameplayAbility.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MEATLOAF_API UGAS_GameplayAbility : public UGameplayAbility
+class MEATLOAF_API ULoafGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
 
 
 public:
-	UGAS_GameplayAbility();
+	ULoafGameplayAbility();
 
 	// Abilities with this set will auto activate when the input is pressed
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Ability")
-	EGasAbilityInputID AbilityInputID = EGasAbilityInputID::None;
+	ELoafAbilityInputID AbilityInputID = ELoafAbilityInputID::None;
 };

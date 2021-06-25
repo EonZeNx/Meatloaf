@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "EntityStates.generated.h"
+#include "LoafEntityStates.generated.h"
 
 UENUM(BlueprintType)
 enum class EEntityStance : uint8 {

@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GAS/GAS_AbilitySystemComponent.h"
+#include "GAS/LoafAbilitySystemComponent.h"
 

@@ -1,94 +1,60 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Characters/EntityCharacter.h"
+#include "Characters/LoafCharacter.h"
 
-#include "GAS/GAS_AbilitySystemComponent.h"
-#include "GAS/GAS_GameplayAbility.h"
-#include "GAS/GAS_AttributeSet.h"
+#include "GAS/LoafAbilitySystemComponent.h"
+#include "GAS/LoafGameplayAbility.h"
+#include "GAS/LoafAttributeSet.h"
 #include "GameplayEffectTypes.h"
 
 
-// Sets default values
-AEntityCharacter::AEntityCharacter()
+ALoafCharacter::ALoafCharacter()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	/** References. **/
-	/* A reference to the owners' movement component. */
+	/** REFERENCES **/
 	CMC = GetCharacterMovement();
-	
-	/* Default sprint speed */
+
+	/** MOVEMENT **/
 	SprintSpeed = 750.f;
-	/* Default run speed */
 	RunSpeed = 500.f;
-	/* Default crouch speed */
 	CrouchSpeed = 350.f;
 
-	/* Whether or not the character is sprinting */
 	bIsSprinting = false;
-	/* Whether or not the character is crouching */
 	bIsCrouching = false;
 
-	/** Stance config. **/
+	/** STANCE **/
 	StandingCapsuleHalfHeight = 88.f;
 	StandingCapsuleRadius = 34.f;
 	CrouchingCapsuleHalfHeight = 44.f;
 	CrouchingCapsuleRadius = 34.f;
 	
-	/* Stance timings. */
+	/* Stance timings */
 	CrouchTransitionTime = 0.2f;
 	CurrentCrouchTransitionTime = 0.f;
 
-	/** Jump config. */
+	/** JUMP **/
 	JumpScalar = 750.f;
 	MaxAirJumps = 1;
 	CurrentAirJumps = 0;
 
-	/* GAS */
-	ASC = CreateDefaultSubobject<UGAS_AbilitySystemComponent>("ASC");
+	/** GAS **/
+	ASC = CreateDefaultSubobject<ULoafAbilitySystemComponent>("ASC");
 	ASC->SetIsReplicated(true);
 	ASC->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
-	Attributes = CreateDefaultSubobject<UGAS_AttributeSet>("Attributes");
+	Attributes = CreateDefaultSubobject<ULoafAttributeSet>("Attributes");
 }
 
-// Called when the game starts or when spawned
-void AEntityCharacter::BeginPlay()
+
+/** OVERRIDES **/
+void ALoafCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
-void AEntityCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
-// Called to bind functionality to input
-void AEntityCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	// May get called in an init state where one is not setup yet.
-	if (ASC && InputComponent)
-	{
-		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "EGasAbilityInputID",
-            static_cast<int32>(EGasAbilityInputID::Confirm),
-            static_cast<int32>(EGasAbilityInputID::Cancel));
-		
-		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
-	}
-}
-
-void AEntityCharacter::Landed(const FHitResult& Hit)
-{
-	CurrentAirJumps = 0;
-}
-
-void AEntityCharacter::PossessedBy(AController* NewController)
+void ALoafCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
@@ -100,7 +66,7 @@ void AEntityCharacter::PossessedBy(AController* NewController)
 	GiveAbilities();
 }
 
-void AEntityCharacter::OnRep_PlayerState()
+void ALoafCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
 
@@ -109,17 +75,44 @@ void AEntityCharacter::OnRep_PlayerState()
 
 	if (ASC && InputComponent)
 	{
-		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "EGasAbilityInputID",
-			static_cast<int32>(EGasAbilityInputID::Confirm),
-			static_cast<int32>(EGasAbilityInputID::Cancel));
+		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "ELoafAbilityInputID",
+            static_cast<int32>(ELoafAbilityInputID::Confirm),
+            static_cast<int32>(ELoafAbilityInputID::Cancel));
 		
 		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
 	}
 }
 
+void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-// Functions
-void AEntityCharacter::MoveForBack_Implementation(float value)
+	// May get called in an init state where one is not setup yet.
+	if (ASC && InputComponent)
+	{
+		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "ELoafAbilityInputID",
+            static_cast<int32>(ELoafAbilityInputID::Confirm),
+            static_cast<int32>(ELoafAbilityInputID::Cancel));
+		
+		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
+	}
+}
+
+void ALoafCharacter::Landed(const FHitResult& Hit)
+{
+	CurrentAirJumps = 0;
+}
+
+void ALoafCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+
+/** FUNCTIONS **/
+
+/** MOVEMENT **/
+void ALoafCharacter::MoveForBack_Implementation(float value)
 {
 	if (value != 0.0f)
 	{
@@ -127,7 +120,7 @@ void AEntityCharacter::MoveForBack_Implementation(float value)
 	}
 }
 
-void AEntityCharacter::MoveLeftRight_Implementation(float value)
+void ALoafCharacter::MoveLeftRight_Implementation(float value)
 {
 	if (value != 0.0f)
 	{
@@ -135,7 +128,8 @@ void AEntityCharacter::MoveLeftRight_Implementation(float value)
 	}
 }
 
-void AEntityCharacter::CustomJump_Implementation()
+/** ACTIONS **/
+void ALoafCharacter::CustomJump_Implementation()
 {
 	if (CMC->IsFalling() && CurrentAirJumps >= MaxAirJumps) return;
 	
@@ -147,8 +141,8 @@ void AEntityCharacter::CustomJump_Implementation()
 	if (CMC->IsFalling()) CurrentAirJumps++;
 }
 
-// Sprint
-void AEntityCharacter::ToggleSprint_Implementation()
+/* Sprint */
+void ALoafCharacter::ToggleSprint_Implementation()
 {
 	if (bIsSprinting) {
 		StopSprint_Implementation();
@@ -158,7 +152,7 @@ void AEntityCharacter::ToggleSprint_Implementation()
 	}
 }
 
-void AEntityCharacter::StartSprint_Implementation()
+void ALoafCharacter::StartSprint_Implementation()
 {
 	if (bIsSprinting) { return; }
 
@@ -167,7 +161,7 @@ void AEntityCharacter::StartSprint_Implementation()
 	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 }
 
-void AEntityCharacter::StopSprint_Implementation()
+void ALoafCharacter::StopSprint_Implementation()
 {
 	if (!bIsSprinting) { return; }
 
@@ -175,8 +169,8 @@ void AEntityCharacter::StopSprint_Implementation()
 	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 }
 
-// Crouch
-void AEntityCharacter::ToggleCrouch_Implementation()
+/* Crouch */
+void ALoafCharacter::ToggleCrouch_Implementation()
 {
 	if (bIsCrouching) {
 		StopCrouch_Implementation();
@@ -186,7 +180,7 @@ void AEntityCharacter::ToggleCrouch_Implementation()
 	}
 }
 
-void AEntityCharacter::StartCrouch_Implementation()
+void ALoafCharacter::StartCrouch_Implementation()
 {
 	if (bIsCrouching) { return; }
 
@@ -196,7 +190,7 @@ void AEntityCharacter::StartCrouch_Implementation()
 	GetCharacterMovement()->MaxWalkSpeed = CrouchSpeed;
 }
 
-void AEntityCharacter::StopCrouch_Implementation()
+void ALoafCharacter::StopCrouch_Implementation()
 {
 	if (!bIsCrouching) { return; }
 
@@ -205,13 +199,14 @@ void AEntityCharacter::StopCrouch_Implementation()
 	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 }
 
-/* GAS */
-class UAbilitySystemComponent* AEntityCharacter::GetAbilitySystemComponent() const
+
+/** GAS **/
+class UAbilitySystemComponent* ALoafCharacter::GetAbilitySystemComponent() const
 {
 	return ASC;
 }
 
-void AEntityCharacter::InitAttributes()
+void ALoafCharacter::InitAttributes()
 {
 	if (ASC && DefaultAttributeEffect)
 	{
@@ -227,12 +222,12 @@ void AEntityCharacter::InitAttributes()
 	}
 }
 
-void AEntityCharacter::GiveAbilities()
+void ALoafCharacter::GiveAbilities()
 {
 	// if (HasAuthority() && ASC) { }
 	if (!HasAuthority() || !ASC) return;
 
-	for(TSubclassOf<UGAS_GameplayAbility>& StartupAbility : DefaultAbilities)
+	for(TSubclassOf<ULoafGameplayAbility>& StartupAbility : DefaultAbilities)
 	{
 		ASC->GiveAbility(
 			FGameplayAbilitySpec(StartupAbility, 1, static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID), this));

@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
-#include "GAS_AbilitySystemComponent.generated.h"
+#include "LoafAbilitySystemComponent.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MEATLOAF_API UGAS_AbilitySystemComponent : public UAbilitySystemComponent
+class MEATLOAF_API ULoafAbilitySystemComponent : public UAbilitySystemComponent
 {
 	GENERATED_BODY()
 	
