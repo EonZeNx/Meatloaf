@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "EntityStructs.generated.h"
+#include "LoafEntityStructs.generated.h"
 
 USTRUCT(BlueprintType)
 struct FBasicMovementStruct

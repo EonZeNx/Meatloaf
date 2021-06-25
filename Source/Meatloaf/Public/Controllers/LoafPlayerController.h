@@ -4,24 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "CustomPlayerController.generated.h"
+#include "LoafPlayerController.generated.h"
 
 /**
  * Basic player controller
  */
 UCLASS()
-class MEATLOAF_API ACustomPlayerController : public APlayerController
+class MEATLOAF_API ALoafPlayerController : public APlayerController
 {
-private:
 	GENERATED_BODY()
 
-	/* VARIABLES */
-public:
+/** VARIABLES **/
 protected:
-	/* References */
+	/** REFERENCES **/
 	bool bPawnImplementsBasicMovement;
 
-	/* Controller */
+	/** CONTROLLER **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Limit|Yaw")
 	float ControllerUpperYawLimit;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Limit|Yaw")
@@ -32,7 +30,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Limit|Pitch")
 	float ControllerLowerPitchLimit;
 	
-	/* Input */
+	/** INPUT **/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	float MouseXSensitivity;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
@@ -40,24 +38,26 @@ protected:
 	
 private:
 
-	/* FUNCTIONS */
+/** FUNCTIONS **/
 public:
-	ACustomPlayerController();
+	ALoafPlayerController();
 	
 protected:
-	virtual void SetupInputComponent() override;
+	/** OVERRIDES **/
 	virtual void OnPossess(APawn* InPawn) override;
+	virtual void OnRep_PlayerState() override;
+	virtual void SetupInputComponent() override;
 	virtual void Tick(float DeltaTime) override;
 	
 private:
-	/* AXES */
+	/** AXES **/
 	void LookYaw(float value);
 	void LookPitch(float value);
 	
 	void MoveForwardBackward(float value);
 	void MoveLeftRight(float value);
 
-	/* ACTIONS */
+	/** ACTIONS **/
 	void CustomJump();
 	
 	void ToggleSprint();
