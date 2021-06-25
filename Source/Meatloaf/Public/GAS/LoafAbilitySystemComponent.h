@@ -13,5 +13,8 @@ UCLASS()
 class MEATLOAF_API ULoafAbilitySystemComponent : public UAbilitySystemComponent
 {
 	GENERATED_BODY()
-	
+
+public:
+	bool CharacterAbilitiesGiven = false;
+	bool StartupEffectsApplied = false;
 };

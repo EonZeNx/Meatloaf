@@ -28,20 +28,51 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	/* ATTRIBUTES */
+	/** ATTRIBUTES **/
+	/* Character Level */
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Character Level", ReplicatedUsing = OnRep_CharacterLevel)
+	FGameplayAttributeData CharacterLevel;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, CharacterLevel)
+	
 	/* Health */
-	UPROPERTY(BlueprintReadOnly, Category="Attributes", ReplicatedUsing=OnRep_Health)
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Health", ReplicatedUsing = OnRep_Health)
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, Health);
 
-	UFUNCTION()
-	virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
+	/* Max Health */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Health", ReplicatedUsing = OnRep_MaxHealth)
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxHealth);
 
 	/* Jump power */
-	UPROPERTY(BlueprintReadOnly, Category="Attributes", ReplicatedUsing=OnRep_JumpPower)
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jump Power", ReplicatedUsing = OnRep_JumpPower)
 	FGameplayAttributeData JumpPower;
 	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, JumpPower);
 
+	/* Max Jump Power */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jump Power", ReplicatedUsing = OnRep_MaxJumpPower)
+	FGameplayAttributeData MaxJumpPower;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxJumpPower);
+
+
+	/** ATTRIBUTE REPS **/
+	/* Character Level */
+	UFUNCTION()
+	virtual void OnRep_CharacterLevel(const FGameplayAttributeData& OldCharacterLevel);
+	
+	/* Health */
+	UFUNCTION()
+    virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
+	
+	/* Max Health */
+	UFUNCTION()
+    virtual void OnRep_MaxHealth(const FGameplayAttributeData& OldHealth);
+	
+	/* Jump power */
 	UFUNCTION()
     virtual void OnRep_JumpPower(const FGameplayAttributeData& OldJumpPower);
+	
+	/* Max Jump Power */
+	UFUNCTION()
+    virtual void OnRep_MaxJumpPower(const FGameplayAttributeData& OldHealth);
 };

@@ -18,6 +18,11 @@ void ULoafAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	DOREPLIFETIME_CONDITION_NOTIFY(ULoafAttributeSet, JumpPower, COND_None, REPNOTIFY_Always);
 }
 
+void ULoafAttributeSet::OnRep_CharacterLevel(const FGameplayAttributeData& OldCharacterLevel)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, CharacterLevel, OldCharacterLevel);
+}
+
 void ULoafAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, Health, OldHealth);
@@ -27,3 +32,14 @@ void ULoafAttributeSet::OnRep_JumpPower(const FGameplayAttributeData& OldJumpPow
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, JumpPower, OldJumpPower);
 }
+
+void ULoafAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, MaxHealth, OldMaxHealth);
+}
+
+void ULoafAttributeSet::OnRep_MaxJumpPower(const FGameplayAttributeData& OldMaxJumpPower)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, MaxJumpPower, OldMaxJumpPower);
+}
+

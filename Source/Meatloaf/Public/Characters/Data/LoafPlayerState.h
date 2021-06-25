@@ -23,7 +23,7 @@ protected:
 	class ULoafAbilitySystemComponent* ASC;
 
 	UPROPERTY()
-	class ULoafAttributeSet* AttributeSetBase;
+	class ULoafAttributeSet* DefaultAttributes;  // AttributeSetBase
 
 	FGameplayTag DeadTag;
 
@@ -33,6 +33,9 @@ protected:
 	
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes")
     float GetJumpPower() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes")
+	int32 GetCharacterLevel() const;
 	
 /** FUNCTIONS **/
 public:
@@ -41,7 +44,7 @@ public:
 	// Implement IAbilitySystemInterface
 	virtual class ULoafAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	class ULoafAttributeSet* GetAttributeSetBase() const;
+	class ULoafAttributeSet* GetDefaultAttributes() const;
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState")
     bool IsAlive() const;

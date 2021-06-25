@@ -10,6 +10,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GAS/LoafAbilitySystemComponent.h"
 #include "GAS/LoafAttributeSet.h"
+#include "GAS/Data/LoafGasStates.h"
+
 
 #include "LoafCharacter.generated.h"
 
@@ -21,15 +23,15 @@ class MEATLOAF_API ALoafCharacter : public ACharacter, public IBasicMovement, pu
 /** VARIABLES **/
 public:
 	/** GAS **/
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="GAS")
-	class ULoafAbilitySystemComponent* ASC;
+	TWeakObjectPtr<class ULoafAbilitySystemComponent> ASC;  // AbilitySystemComponent
+	TWeakObjectPtr<class ULoafAttributeSet> DefaultAttributes;  // DefaultAttributes
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="GAS")
-	class ULoafAttributeSet* Attributes;
-
+	// Default attributes for a character for initializing on spawn/respawn.
+	// This is an instant GE that overrides the values for attributes that get reset on spawn/respawn.
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="GAS")
 	TSubclassOf<class UGameplayEffect> DefaultAttributeEffect;
 
+	// Default abilities for this Character. These will be removed on Character death and regiven if Character respawns.
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category="GAS")
 	TArray<TSubclassOf<class ULoafGameplayAbility>> DefaultAbilities;
 
@@ -90,6 +92,29 @@ public:
 	// Required to use the Ability System Component
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+	UFUNCTION(BlueprintCallable)
+    virtual void CustomJump_Implementation() override;
+
+	// Switch on AbilityID to return individual ability levels. Hardcoded to 1 for every ability in this project.
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter")
+    virtual int32 GetAbilityLevel(ELoafAbilityInputID AbilityID) const;
+
+	/* Getters */
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes")
+    int32 GetCharacterLevel() const;
+	
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Health")
+    float GetHealth() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Health")
+    float GetMaxHealth() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jump Power")
+    float GetJumpPower() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jump Power")
+    float GetMaxJumpPower() const;
+	
 	
 protected:
 	/** OVERRIDES **/
@@ -110,9 +135,6 @@ protected:
 
 	
 	/** ACTIONS **/
-	UFUNCTION(BlueprintCallable)
-    virtual void CustomJump_Implementation() override;
-	
 	/* Sprint */
 	UFUNCTION(BlueprintCallable)
     virtual void ToggleSprint_Implementation() override;
@@ -133,5 +155,5 @@ protected:
 private:
 	/** GAS **/
 	virtual void InitAttributes();
-	virtual void GiveAbilities();
+	virtual void AddCharacterAbilities();
 };

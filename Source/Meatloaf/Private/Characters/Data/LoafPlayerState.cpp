@@ -16,7 +16,7 @@ ALoafPlayerState::ALoafPlayerState()
 	// Create the attribute set, this replicates by default
 	// Adding it as a subobject of the owning actor of an AbilitySystemComponent
 	// automatically registers the AttributeSet with the AbilitySystemComponent
-	AttributeSetBase = CreateDefaultSubobject<ULoafAttributeSet>(TEXT("AttributeSetBase"));
+	DefaultAttributes = CreateDefaultSubobject<ULoafAttributeSet>(TEXT("DefaultAttributes"));
 
 	// Set PlayerState's NetUpdateFrequency to the same as the Character.
 	// Default is very low for PlayerStates and introduces perceived lag in the ability system.
@@ -32,9 +32,14 @@ ULoafAbilitySystemComponent* ALoafPlayerState::GetAbilitySystemComponent() const
 	return ASC;
 }
 
-ULoafAttributeSet* ALoafPlayerState::GetAttributeSetBase() const
+ULoafAttributeSet* ALoafPlayerState::GetDefaultAttributes() const
 {
-	return AttributeSetBase;
+	return DefaultAttributes;
+}
+
+int32 ALoafPlayerState::GetCharacterLevel() const
+{
+	return DefaultAttributes->GetCharacterLevel();
 }
 
 bool ALoafPlayerState::IsAlive() const
@@ -51,10 +56,10 @@ void ALoafPlayerState::ShowAbilityConfirmCancelText(bool ShowText)
 /** ATTRIBUTES **/
 float ALoafPlayerState::GetHealth() const
 {
-	return AttributeSetBase->GetHealth();
+	return DefaultAttributes->GetHealth();
 }
 
 float ALoafPlayerState::GetJumpPower() const
 {
-	return AttributeSetBase->GetJumpPower();
+	return DefaultAttributes->GetJumpPower();
 }

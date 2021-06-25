@@ -7,6 +7,7 @@
 #include "GAS/LoafGameplayAbility.h"
 #include "GAS/LoafAttributeSet.h"
 #include "GameplayEffectTypes.h"
+#include "Characters/Data/LoafPlayerState.h"
 
 
 ALoafCharacter::ALoafCharacter()
@@ -44,7 +45,7 @@ ALoafCharacter::ALoafCharacter()
 	ASC->SetIsReplicated(true);
 	ASC->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
-	Attributes = CreateDefaultSubobject<ULoafAttributeSet>("Attributes");
+	DefaultAttributes = CreateDefaultSubobject<ULoafAttributeSet>("DefaultAttributes");
 }
 
 
@@ -59,11 +60,23 @@ void ALoafCharacter::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	// Server GAS init
-	// ASC->InitAbilityActorInfo(this, this);
-	ASC->InitAbilityActorInfo(NewController, this);
+	if (ALoafPlayerState* PS = GetPlayerState<ALoafPlayerState>())
+	{
+		// Set the ASC on the Server. Clients do this in OnRep_PlayerState()
+		ASC = Cast<ULoafAbilitySystemComponent>(PS->GetAbilitySystemComponent());
 
-	InitAttributes();
-	GiveAbilities();
+		// AI won't have PlayerControllers so we can init again here just to be sure. No harm in init twice for heroes that have PlayerControllers.
+		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
+
+		// Set the DefaultAttributes for convenience attribute functions
+		DefaultAttributes = PS->GetDefaultAttributes();
+
+		// If we handle players disconnecting and rejoining in the future, we'll have to change this so that possession from rejoining doesn't reset attributes.
+		// For now assume possession = spawn/respawn.
+		InitAttributes();
+		// AddStartupEffects();
+		AddCharacterAbilities();
+	}
 }
 
 void ALoafCharacter::OnRep_PlayerState()
@@ -73,7 +86,7 @@ void ALoafCharacter::OnRep_PlayerState()
 	ASC->InitAbilityActorInfo(this, this);
 	InitAttributes();
 
-	if (ASC && InputComponent)
+	if (ASC.IsValid() && InputComponent)
 	{
 		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "ELoafAbilityInputID",
             static_cast<int32>(ELoafAbilityInputID::Confirm),
@@ -88,7 +101,7 @@ void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	// May get called in an init state where one is not setup yet.
-	if (ASC && InputComponent)
+	if (ASC.IsValid() && InputComponent)
 	{
 		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "ELoafAbilityInputID",
             static_cast<int32>(ELoafAbilityInputID::Confirm),
@@ -203,33 +216,88 @@ void ALoafCharacter::StopCrouch_Implementation()
 /** GAS **/
 class UAbilitySystemComponent* ALoafCharacter::GetAbilitySystemComponent() const
 {
-	return ASC;
+	return ASC.Get();
 }
+
+int32 ALoafCharacter::GetAbilityLevel(ELoafAbilityInputID AbilityID) const
+{
+	return 1;
+}
+
+int32 ALoafCharacter::GetCharacterLevel() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0; }
+
+	return static_cast<int32>(DefaultAttributes->GetCharacterLevel());
+}
+
 
 void ALoafCharacter::InitAttributes()
 {
-	if (ASC && DefaultAttributeEffect)
+	if (!ASC.IsValid())
 	{
-		FGameplayEffectContextHandle EffectContext = ASC->MakeEffectContext();
-		EffectContext.AddSourceObject(this);
+		return;
+	}
 
-		FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(DefaultAttributeEffect, 1, EffectContext);
+	if (!DefaultAttributeEffect)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s() Missing DefaultAttributes for %s. Please fill in the character's Blueprint."), *FString(__FUNCTION__), *GetName());
+		return;
+	}
 
-		if (SpecHandle.IsValid())
-		{
-			FActiveGameplayEffectHandle GEHandle = ASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
-		}
+	// Can run on Server and Client
+	FGameplayEffectContextHandle EffectContext = ASC->MakeEffectContext();
+	EffectContext.AddSourceObject(this);
+
+	FGameplayEffectSpecHandle NewHandle = ASC->MakeOutgoingSpec(DefaultAttributeEffect, GetCharacterLevel(), EffectContext);
+	if (NewHandle.IsValid())
+	{
+		FActiveGameplayEffectHandle ActiveGEHandle = ASC->ApplyGameplayEffectSpecToTarget(*NewHandle.Data.Get(), ASC.Get());
 	}
 }
 
-void ALoafCharacter::GiveAbilities()
+void ALoafCharacter::AddCharacterAbilities()
 {
-	// if (HasAuthority() && ASC) { }
-	if (!HasAuthority() || !ASC) return;
+	// Grant abilities, but only on the server	
+	if (GetLocalRole() != ROLE_Authority || !ASC.IsValid() || ASC->CharacterAbilitiesGiven)
+	{
+		return;
+	}
 
-	for(TSubclassOf<ULoafGameplayAbility>& StartupAbility : DefaultAbilities)
+	for (TSubclassOf<ULoafGameplayAbility>& StartupAbility : DefaultAbilities)
 	{
 		ASC->GiveAbility(
-			FGameplayAbilitySpec(StartupAbility, 1, static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID), this));
+            FGameplayAbilitySpec(StartupAbility, GetAbilityLevel(StartupAbility.GetDefaultObject()->AbilityID), static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID), this));
 	}
+
+	ASC->CharacterAbilitiesGiven = true;
+}
+
+/* Getters */
+float ALoafCharacter::GetHealth() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+
+	return DefaultAttributes->GetHealth();
+}
+
+float ALoafCharacter::GetMaxHealth() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+	
+	return DefaultAttributes->GetMaxHealth();
+}
+
+float ALoafCharacter::GetJumpPower() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+
+	return DefaultAttributes->GetJumpPower();
+}
+
+float ALoafCharacter::GetMaxJumpPower() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+	
+	return DefaultAttributes->GetMaxJumpPower();
 }
