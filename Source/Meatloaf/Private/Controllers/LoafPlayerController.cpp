@@ -27,9 +27,6 @@ void ALoafPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	/** ACTIONS **/
-	// Basic Movement actions.
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ALoafPlayerController::CustomJump);
-	
 	InputComponent->BindAction("ToggleSprint", IE_Pressed, this, &ALoafPlayerController::ToggleSprint);
 	InputComponent->BindAction("HoldSprint", IE_Pressed, this, &ALoafPlayerController::StartSprint);
 	InputComponent->BindAction("HoldSprint", IE_Released, this, &ALoafPlayerController::StopSprint);

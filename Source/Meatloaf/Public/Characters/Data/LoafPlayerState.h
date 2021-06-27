@@ -27,15 +27,18 @@ protected:
 
 	FGameplayTag DeadTag;
 
+	
 	/** ATTRIBUTES **/
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes")
     int32 GetCharacterLevel() const;
+
 	
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Health")
     float GetHealth() const;
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Health")
     float GetMaxHealth() const;
+
 	
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jump Power")
     float GetJumpPower() const;
@@ -43,11 +46,26 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jump Power")
     float GetMaxJumpPower() const;
 
+	
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jumps")
     int GetCurrentJumps() const;
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jumps")
     int GetMaxJumps() const;
+
+	
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Movement")
+    float GetMoveAccel() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Movement")
+    float MaxMoveSpeed() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Movement")
+    float GetSprintAccel() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Movement")
+    float GetMaxSprintMoveSpeed() const;
+
 	
 /** FUNCTIONS **/
 public:

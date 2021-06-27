@@ -9,24 +9,18 @@
 #include "GameplayEffectTypes.h"
 #include "Characters/Data/LoafPlayerState.h"
 #include "Controllers/LoafPlayerController.h"
-#include "GAS/Effects/GEReturnJumps.h"
-#include "GAS/Effects/GEUseJump.h"
+#include "GAS/Effects/Jump/GEReturnJumps.h"
+#include "GAS/Effects/Jump/GEUseJump.h"
 
 
 ALoafCharacter::ALoafCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
 	
 	/** REFERENCES **/
 	CMC = GetCharacterMovement();
-
-	/** MOVEMENT **/
-	SprintSpeed = 750.f;
-	RunSpeed = 500.f;
-	CrouchSpeed = 350.f;
-
-	bIsSprinting = false;
-	bIsCrouching = false;
+	
 
 	/** STANCE **/
 	StandingCapsuleHalfHeight = 88.f;
@@ -38,6 +32,7 @@ ALoafCharacter::ALoafCharacter()
 	CrouchTransitionTime = 0.2f;
 	CurrentCrouchTransitionTime = 0.f;
 
+	
 	/** GAS **/
 	ASC = CreateDefaultSubobject<ULoafAbilitySystemComponent>("ASC");
 	ASC->SetIsReplicated(true);
@@ -57,8 +52,10 @@ void ALoafCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	ALoafPlayerController* CastController = Cast<ALoafPlayerController>(NewController);
-	if (CastController) LoafController = CastController;
+	if (ALoafPlayerController* CastController = Cast<ALoafPlayerController>(NewController))
+	{
+		LoafController = CastController;
+	}
 
 	// Server GAS init
 	if (ALoafPlayerState* PS = GetPlayerState<ALoafPlayerState>())
@@ -86,15 +83,7 @@ void ALoafCharacter::OnRep_PlayerState()
 
 	ASC->InitAbilityActorInfo(this, this);
 	InitAttributes();
-
-	if (ASC.IsValid() && InputComponent)
-	{
-		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "ELoafAbilityInputID",
-            static_cast<int32>(ELoafAbilityInputID::Confirm),
-            static_cast<int32>(ELoafAbilityInputID::Cancel));
-		
-		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
-	}
+	BindAsc();
 }
 
 void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -107,16 +96,12 @@ void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAxis("MoveForwardBackward", this, &ALoafCharacter::MoveForBack_Implementation);
 	PlayerInputComponent->BindAxis("MoveLeftRight", this, &ALoafCharacter::MoveLeftRight_Implementation);
+	
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ALoafCharacter::CustomJump_Implementation);
+	
 
 	// May get called in an init state where one is not setup yet.
-	if (ASC.IsValid() && InputComponent)
-	{
-		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "ELoafAbilityInputID",
-            static_cast<int32>(ELoafAbilityInputID::Confirm),
-            static_cast<int32>(ELoafAbilityInputID::Cancel));
-		
-		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
-	}
+	BindAsc();
 }
 
 void ALoafCharacter::Landed(const FHitResult& Hit)
@@ -162,19 +147,19 @@ bool ALoafCharacter::IsFalling() const
 
 
 /** MOVEMENT **/
-void ALoafCharacter::MoveForBack_Implementation(float value)
+void ALoafCharacter::MoveForBack_Implementation(float Value)
 {
-	if (value != 0.0f)
+	if (Value != 0.0f)
 	{
-		AddMovementInput(GetActorForwardVector(), value);
+		AddMovementInput(GetActorForwardVector(), Value);
 	}
 }
 
-void ALoafCharacter::MoveLeftRight_Implementation(float value)
+void ALoafCharacter::MoveLeftRight_Implementation(float Value)
 {
-	if (value != 0.0f)
+	if (Value != 0.0f)
 	{
-		AddMovementInput(GetActorRightVector(), value);
+		AddMovementInput(GetActorRightVector(), Value);
 	}
 }
 
@@ -199,59 +184,59 @@ void ALoafCharacter::CustomJump_Implementation()
 /* Sprint */
 void ALoafCharacter::ToggleSprint_Implementation()
 {
-	if (bIsSprinting) {
-		StopSprint_Implementation();
-	}
-	else {
-		StartSprint_Implementation();
-	}
+	// if (bIsSprinting) {
+	// 	StopSprint_Implementation();
+	// }
+	// else {
+	// 	StartSprint_Implementation();
+	// }
 }
 
 void ALoafCharacter::StartSprint_Implementation()
 {
-	if (bIsSprinting) { return; }
-
-	StopCrouch_Implementation();
-	bIsSprinting = true;
-	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	// if (bIsSprinting) { return; }
+	//
+	// StopCrouch_Implementation();
+	// bIsSprinting = true;
+	// GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 }
 
 void ALoafCharacter::StopSprint_Implementation()
 {
-	if (!bIsSprinting) { return; }
-
-	bIsSprinting = false;
-	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	// if (!bIsSprinting) { return; }
+	//
+	// bIsSprinting = false;
+	// GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 }
 
 /* Crouch */
 void ALoafCharacter::ToggleCrouch_Implementation()
 {
-	if (bIsCrouching) {
-		StopCrouch_Implementation();
-	}
-	else {
-		StartCrouch_Implementation();
-	}
+	// if (bIsCrouching) {
+	// 	StopCrouch_Implementation();
+	// }
+	// else {
+	// 	StartCrouch_Implementation();
+	// }
 }
 
 void ALoafCharacter::StartCrouch_Implementation()
 {
-	if (bIsCrouching) { return; }
-
-	StopSprint_Implementation();
-	CurrentCrouchTransitionTime = 0.f;
-	bIsCrouching = true;
-	GetCharacterMovement()->MaxWalkSpeed = CrouchSpeed;
+	// if (bIsCrouching) { return; }
+	//
+	// StopSprint_Implementation();
+	// CurrentCrouchTransitionTime = 0.f;
+	// bIsCrouching = true;
+	// GetCharacterMovement()->MaxWalkSpeed = CrouchSpeed;
 }
 
 void ALoafCharacter::StopCrouch_Implementation()
 {
-	if (!bIsCrouching) { return; }
-
-	CurrentCrouchTransitionTime = CrouchTransitionTime;
-	bIsCrouching = false;
-	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	// if (!bIsCrouching) { return; }
+	//
+	// CurrentCrouchTransitionTime = CrouchTransitionTime;
+	// bIsCrouching = false;
+	// GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 }
 
 
@@ -295,11 +280,33 @@ void ALoafCharacter::AddCharacterAbilities()
 
 	for (TSubclassOf<ULoafGameplayAbility>& StartupAbility : DefaultAbilities)
 	{
+		if (!StartupAbility->IsValidLowLevel())
+		{
+			UE_LOG(LogTemp, Error, TEXT("%s() Invalid StartupAbility. Is there an empty entry?"), *FString(__FUNCTION__));
+			GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Orange, FString(TEXT("Invalid StartupAbility. Is there an empty entry?")));
+			return;
+		}
+		// This will crash the game if there is an empty entry in DefaultAbilities
 		ASC->GiveAbility(
             FGameplayAbilitySpec(StartupAbility, GetAbilityLevel(StartupAbility.GetDefaultObject()->AbilityID), static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID), this));
 	}
 
 	ASC->CharacterAbilitiesGiven = true;
+}
+
+void ALoafCharacter::BindAsc()
+{
+	if (ASC.IsValid() && InputComponent)
+	{
+		const FGameplayAbilityInputBinds Binds("Confirm", "Cancel", "ELoafAbilityInputID",
+            static_cast<int32>(ELoafAbilityInputID::Confirm),
+            static_cast<int32>(ELoafAbilityInputID::Cancel));
+		
+		ASC->BindAbilityActivationToInputComponent(InputComponent, Binds);
+
+		CMC->MaxAcceleration = GetMoveAccel();
+		CMC->MaxWalkSpeed = GetMaxMoveSpeed();
+	}
 }
 
 
@@ -316,6 +323,7 @@ int32 ALoafCharacter::GetCharacterLevel() const
 	return static_cast<int32>(DefaultAttributes->GetCharacterLevel());
 }
 
+
 float ALoafCharacter::GetHealth() const
 {
 	if (!DefaultAttributes.IsValid()) { return 0.0f; }
@@ -329,6 +337,7 @@ float ALoafCharacter::GetMaxHealth() const
 	
 	return DefaultAttributes->GetMaxHealth();
 }
+
 
 float ALoafCharacter::GetJumpPower() const
 {
@@ -344,6 +353,7 @@ float ALoafCharacter::GetMaxJumpPower() const
 	return DefaultAttributes->GetMaxJumpPower();
 }
 
+
 int ALoafCharacter::GetCurrentJumps() const
 {
 	if (!DefaultAttributes.IsValid()) { return 0; }
@@ -356,4 +366,33 @@ int ALoafCharacter::GetMaxJumps() const
 	if (!DefaultAttributes.IsValid()) { return 0; }
 	
 	return static_cast<int>(DefaultAttributes->GetMaxJumps());
+}
+
+
+float ALoafCharacter::GetMoveAccel() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+	
+	return DefaultAttributes->GetMoveAccel();
+}
+
+float ALoafCharacter::GetMaxMoveSpeed() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+	
+	return DefaultAttributes->GetMaxMoveSpeed();
+}
+
+float ALoafCharacter::GetSprintAccel() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+	
+	return DefaultAttributes->GetSprintAccel();
+}
+
+float ALoafCharacter::GetMaxSprintMoveSpeed() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0.0f; }
+	
+	return DefaultAttributes->GetMaxSprintMoveSpeed();
 }

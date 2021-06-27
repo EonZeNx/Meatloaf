@@ -49,6 +49,7 @@ int32 ALoafPlayerState::GetCharacterLevel() const
 	return DefaultAttributes->GetCharacterLevel();
 }
 
+
 float ALoafPlayerState::GetHealth() const
 {
 	return DefaultAttributes->GetHealth();
@@ -58,6 +59,7 @@ float ALoafPlayerState::GetMaxHealth() const
 {
 	return DefaultAttributes->GetMaxHealth();
 }
+
 
 float ALoafPlayerState::GetJumpPower() const
 {
@@ -69,6 +71,7 @@ float ALoafPlayerState::GetMaxJumpPower() const
 	return DefaultAttributes->GetMaxJumpPower();
 }
 
+
 int ALoafPlayerState::GetCurrentJumps() const
 {
 	return DefaultAttributes->GetCurrentJumps();
@@ -77,4 +80,25 @@ int ALoafPlayerState::GetCurrentJumps() const
 int ALoafPlayerState::GetMaxJumps() const
 {
 	return DefaultAttributes->GetMaxJumps();
+}
+
+
+float ALoafPlayerState::GetMoveAccel() const
+{
+	return DefaultAttributes->GetMoveAccel();
+}
+
+float ALoafPlayerState::MaxMoveSpeed() const
+{
+	return DefaultAttributes->GetMaxMoveSpeed();
+}
+
+float ALoafPlayerState::GetSprintAccel() const
+{
+	return DefaultAttributes->GetSprintAccel();
+}
+
+float ALoafPlayerState::GetMaxSprintMoveSpeed() const
+{
+	return DefaultAttributes->GetMaxSprintMoveSpeed();
 }

@@ -5,16 +5,18 @@
 
 #include "CoreMinimal.h"
 #include "GAS/LoafGameplayAbility.h"
-#include "GA_CharacterJump.generated.h"
+#include "GASprint.generated.h"
 
 
 UCLASS()
-class MEATLOAF_API UGA_CharacterJump : public ULoafGameplayAbility
+class MEATLOAF_API UGASprint : public ULoafGameplayAbility
 {
 	GENERATED_BODY()
 
 public:
-	UGA_CharacterJump();
+	UGASprint();
+	
+	FActiveGameplayEffectHandle GESprintingHandle;
 
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 	virtual bool CanActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags = nullptr, const FGameplayTagContainer* TargetTags = nullptr, OUT FGameplayTagContainer* OptionalRelevantTags = nullptr) const override;

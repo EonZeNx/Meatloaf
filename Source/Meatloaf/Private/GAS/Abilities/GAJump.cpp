@@ -1,19 +1,19 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Gas/Abilities/GA_CharacterJump.h"
+#include "Gas/Abilities/GAJump.h"
 
 #include "Characters/LoafCharacter.h"
 #include "GAS/Data/LoafGasStates.h"
 
 
-UGA_CharacterJump::UGA_CharacterJump()
+UGAJump::UGAJump()
 {
 	AbilityInputID = ELoafAbilityInputID::Jump;
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Jump")));
 }
 
-void UGA_CharacterJump::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
+void UGAJump::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
 	const FGameplayEventData* TriggerEventData)
 {
@@ -29,7 +29,7 @@ void UGA_CharacterJump::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	}
 }
 
-bool UGA_CharacterJump::CanActivateAbility(const FGameplayAbilitySpecHandle Handle,
+bool UGAJump::CanActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayTagContainer* SourceTags,
 	const FGameplayTagContainer* TargetTags, FGameplayTagContainer* OptionalRelevantTags) const
 {
@@ -41,7 +41,7 @@ bool UGA_CharacterJump::CanActivateAbility(const FGameplayAbilitySpecHandle Hand
 	);
 }
 
-void UGA_CharacterJump::InputReleased(const FGameplayAbilitySpecHandle Handle,
+void UGAJump::InputReleased(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo)
 {
 	if (ActorInfo != NULL && ActorInfo->AvatarActor != NULL)
@@ -50,13 +50,13 @@ void UGA_CharacterJump::InputReleased(const FGameplayAbilitySpecHandle Handle,
 	}
 }
 
-void UGA_CharacterJump::CancelAbility(const FGameplayAbilitySpecHandle Handle,
+void UGAJump::CancelAbility(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
 	bool bReplicateCancelAbility)
 {
 	if (ScopeLockCount > 0)
 	{
-		WaitingToExecute.Add(FPostLockDelegate::CreateUObject(this, &UGA_CharacterJump::CancelAbility, Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility));
+		WaitingToExecute.Add(FPostLockDelegate::CreateUObject(this, &UGAJump::CancelAbility, Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility));
 		return;
 	}
 

@@ -46,23 +46,6 @@ protected:
 	ALoafPlayerController* LoafController;
 
 	
-	/** MOVEMENT **/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement Config")
-	float SprintSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement Config")
-	float RunSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement Config")
-	float CrouchSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement Config")
-	bool bIsSprinting;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement Config")
-	bool bIsCrouching;
-
-	
 	/** STANCE **/
 	float StandingCapsuleHalfHeight;
 	float StandingCapsuleRadius;
@@ -115,17 +98,32 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Health")
     float GetMaxHealth() const;
 
+	
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jump Power")
     float GetJumpPower() const;
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jump Power")
     float GetMaxJumpPower() const;
 
+	
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jumps")
     int GetCurrentJumps() const;
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jumps")
     int GetMaxJumps() const;
+
+	
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Movement")
+    float GetMoveAccel() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Movement")
+    float GetMaxMoveSpeed() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Movement")
+    float GetSprintAccel() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Movement")
+    float GetMaxSprintMoveSpeed() const;
 	
 	
 protected:
@@ -140,9 +138,9 @@ protected:
 	
 	/** MOVEMENT **/
 	UFUNCTION(BlueprintCallable)
-    virtual void MoveForBack_Implementation(float value) override;
+    virtual void MoveForBack_Implementation(float Value) override;
 	UFUNCTION(BlueprintCallable)
-    virtual void MoveLeftRight_Implementation(float value) override;
+    virtual void MoveLeftRight_Implementation(float Value) override;
 
 
 	/** ACTIONS **/
@@ -165,6 +163,7 @@ protected:
 	
 private:
 	/** GAS **/
+	virtual void BindAsc();
 	virtual void InitAttributes();
 	virtual void AddCharacterAbilities();
 	virtual bool IsAlive();
