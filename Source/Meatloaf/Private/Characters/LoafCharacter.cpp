@@ -8,6 +8,9 @@
 #include "GAS/LoafAttributeSet.h"
 #include "GameplayEffectTypes.h"
 #include "Characters/Data/LoafPlayerState.h"
+#include "Controllers/LoafPlayerController.h"
+#include "GAS/Effects/GEReturnJumps.h"
+#include "GAS/Effects/GEUseJump.h"
 
 
 ALoafCharacter::ALoafCharacter()
@@ -35,11 +38,6 @@ ALoafCharacter::ALoafCharacter()
 	CrouchTransitionTime = 0.2f;
 	CurrentCrouchTransitionTime = 0.f;
 
-	/** JUMP **/
-	JumpScalar = 750.f;
-	MaxAirJumps = 1;
-	CurrentAirJumps = 0;
-
 	/** GAS **/
 	ASC = CreateDefaultSubobject<ULoafAbilitySystemComponent>("ASC");
 	ASC->SetIsReplicated(true);
@@ -58,6 +56,9 @@ void ALoafCharacter::BeginPlay()
 void ALoafCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
+
+	ALoafPlayerController* CastController = Cast<ALoafPlayerController>(NewController);
+	if (CastController) LoafController = CastController;
 
 	// Server GAS init
 	if (ALoafPlayerState* PS = GetPlayerState<ALoafPlayerState>())
@@ -100,6 +101,13 @@ void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	/** AXES **/
+	PlayerInputComponent->BindAxis("LookYaw", this, &ALoafCharacter::LookYaw);
+	PlayerInputComponent->BindAxis("LookPitch", this, &ALoafCharacter::LookPitch);
+
+	PlayerInputComponent->BindAxis("MoveForwardBackward", this, &ALoafCharacter::MoveForBack_Implementation);
+	PlayerInputComponent->BindAxis("MoveLeftRight", this, &ALoafCharacter::MoveLeftRight_Implementation);
+
 	// May get called in an init state where one is not setup yet.
 	if (ASC.IsValid() && InputComponent)
 	{
@@ -113,7 +121,8 @@ void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ALoafCharacter::Landed(const FHitResult& Hit)
 {
-	CurrentAirJumps = 0;
+	UGEReturnJumps* ReturnJumps = NewObject<UGEReturnJumps>();
+	ASC->ApplyGameplayEffectToSelf(ReturnJumps, 1.0f, ASC->MakeEffectContext());
 }
 
 void ALoafCharacter::Tick(float DeltaTime)
@@ -123,6 +132,34 @@ void ALoafCharacter::Tick(float DeltaTime)
 
 
 /** FUNCTIONS **/
+/** CAMERA **/
+void ALoafCharacter::LookYaw(float Value)
+{
+	if (!IsAlive()) return;
+	
+	if (Value != 0.0f)
+	{
+		LoafController->LookYaw(Value);
+	}
+}
+
+void ALoafCharacter::LookPitch(float Value)
+{
+	if (!IsAlive()) return;
+	
+	if (Value != 0.0f)
+	{
+		LoafController->LookPitch(Value);
+	}
+}
+
+
+/** CMC **/
+bool ALoafCharacter::IsFalling() const
+{
+	return CMC->IsFalling();
+}
+
 
 /** MOVEMENT **/
 void ALoafCharacter::MoveForBack_Implementation(float value)
@@ -141,17 +178,22 @@ void ALoafCharacter::MoveLeftRight_Implementation(float value)
 	}
 }
 
+
 /** ACTIONS **/
 void ALoafCharacter::CustomJump_Implementation()
 {
-	if (CMC->IsFalling() && CurrentAirJumps >= MaxAirJumps) return;
+	if (CMC->IsFalling() && GetCurrentJumps() >= GetMaxJumps()) return;
 	
 	FVector JumpForce = FVector(0, 0, 1);
 
-	JumpForce = JumpForce * JumpScalar;
-	LaunchCharacter(JumpForce, false, false);
+	JumpForce = JumpForce * GetJumpPower();
+	LaunchCharacter(JumpForce, false, true);
 
-	if (CMC->IsFalling()) CurrentAirJumps++;
+	if (CMC->IsFalling())
+	{
+		UGEUseJump* UseJump = NewObject<UGEUseJump>();
+		ASC->ApplyGameplayEffectToSelf(UseJump, 1.0f, ASC->MakeEffectContext());
+	}
 }
 
 /* Sprint */
@@ -224,20 +266,10 @@ int32 ALoafCharacter::GetAbilityLevel(ELoafAbilityInputID AbilityID) const
 	return 1;
 }
 
-int32 ALoafCharacter::GetCharacterLevel() const
-{
-	if (!DefaultAttributes.IsValid()) { return 0; }
-
-	return static_cast<int32>(DefaultAttributes->GetCharacterLevel());
-}
-
 
 void ALoafCharacter::InitAttributes()
 {
-	if (!ASC.IsValid())
-	{
-		return;
-	}
+	if (!ASC.IsValid()) return;
 
 	if (!DefaultAttributeEffect)
 	{
@@ -249,7 +281,7 @@ void ALoafCharacter::InitAttributes()
 	FGameplayEffectContextHandle EffectContext = ASC->MakeEffectContext();
 	EffectContext.AddSourceObject(this);
 
-	FGameplayEffectSpecHandle NewHandle = ASC->MakeOutgoingSpec(DefaultAttributeEffect, GetCharacterLevel(), EffectContext);
+	const FGameplayEffectSpecHandle NewHandle = ASC->MakeOutgoingSpec(DefaultAttributeEffect, GetCharacterLevel(), EffectContext);
 	if (NewHandle.IsValid())
 	{
 		FActiveGameplayEffectHandle ActiveGEHandle = ASC->ApplyGameplayEffectSpecToTarget(*NewHandle.Data.Get(), ASC.Get());
@@ -259,10 +291,7 @@ void ALoafCharacter::InitAttributes()
 void ALoafCharacter::AddCharacterAbilities()
 {
 	// Grant abilities, but only on the server	
-	if (GetLocalRole() != ROLE_Authority || !ASC.IsValid() || ASC->CharacterAbilitiesGiven)
-	{
-		return;
-	}
+	if (GetLocalRole() != ROLE_Authority || !ASC.IsValid() || ASC->CharacterAbilitiesGiven) return;
 
 	for (TSubclassOf<ULoafGameplayAbility>& StartupAbility : DefaultAbilities)
 	{
@@ -273,7 +302,20 @@ void ALoafCharacter::AddCharacterAbilities()
 	ASC->CharacterAbilitiesGiven = true;
 }
 
+
+bool ALoafCharacter::IsAlive()
+{
+	return GetHealth() > 0.0f;
+}
+
 /* Getters */
+int32 ALoafCharacter::GetCharacterLevel() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0; }
+
+	return static_cast<int32>(DefaultAttributes->GetCharacterLevel());
+}
+
 float ALoafCharacter::GetHealth() const
 {
 	if (!DefaultAttributes.IsValid()) { return 0.0f; }
@@ -291,7 +333,7 @@ float ALoafCharacter::GetMaxHealth() const
 float ALoafCharacter::GetJumpPower() const
 {
 	if (!DefaultAttributes.IsValid()) { return 0.0f; }
-
+	
 	return DefaultAttributes->GetJumpPower();
 }
 
@@ -300,4 +342,18 @@ float ALoafCharacter::GetMaxJumpPower() const
 	if (!DefaultAttributes.IsValid()) { return 0.0f; }
 	
 	return DefaultAttributes->GetMaxJumpPower();
+}
+
+int ALoafCharacter::GetCurrentJumps() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0; }
+	
+	return static_cast<int>(DefaultAttributes->GetCurrentJumps());
+}
+
+int ALoafCharacter::GetMaxJumps() const
+{
+	if (!DefaultAttributes.IsValid()) { return 0; }
+	
+	return static_cast<int>(DefaultAttributes->GetMaxJumps());
 }

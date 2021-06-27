@@ -35,9 +35,10 @@ bool UGA_CharacterJump::CanActivateAbility(const FGameplayAbilitySpecHandle Hand
 {
 	if (!Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags)) { return false; }
 
-	// TODO: Check if this is the best way for our game
 	const ALoafCharacter* LoafCharacter = CastChecked<ALoafCharacter>(ActorInfo->AvatarActor.Get(), ECastCheckedType::NullAllowed);
-	return LoafCharacter && LoafCharacter->CanJump();
+	return LoafCharacter && (
+		LoafCharacter->GetCurrentJumps() < LoafCharacter->GetMaxJumps() || !LoafCharacter->IsFalling()
+	);
 }
 
 void UGA_CharacterJump::InputReleased(const FGameplayAbilitySpecHandle Handle,

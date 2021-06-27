@@ -42,6 +42,11 @@ private:
 public:
 	ALoafPlayerController();
 	
+	/** AXES **/
+	void LookYaw(float value);
+	void LookPitch(float value);
+	
+	
 protected:
 	/** OVERRIDES **/
 	virtual void OnPossess(APawn* InPawn) override;
@@ -50,13 +55,6 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 	
 private:
-	/** AXES **/
-	void LookYaw(float value);
-	void LookPitch(float value);
-	
-	void MoveForwardBackward(float value);
-	void MoveLeftRight(float value);
-
 	/** ACTIONS **/
 	void CustomJump();
 	

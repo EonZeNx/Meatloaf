@@ -26,16 +26,9 @@ void ALoafPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	/** AXES **/
-	InputComponent->BindAxis("LookYaw", this, &ALoafPlayerController::LookYaw);
-	InputComponent->BindAxis("LookPitch", this, &ALoafPlayerController::LookPitch);
-
-	InputComponent->BindAxis("MoveForwardBackward", this, &ALoafPlayerController::MoveForwardBackward);
-	InputComponent->BindAxis("MoveLeftRight", this, &ALoafPlayerController::MoveLeftRight);
-
 	/** ACTIONS **/
 	// Basic Movement actions.
-	// InputComponent->BindAction("Jump", IE_Pressed, this, &ALoafPlayerController::CustomJump);
+	InputComponent->BindAction("Jump", IE_Pressed, this, &ALoafPlayerController::CustomJump);
 	
 	InputComponent->BindAction("ToggleSprint", IE_Pressed, this, &ALoafPlayerController::ToggleSprint);
 	InputComponent->BindAction("HoldSprint", IE_Pressed, this, &ALoafPlayerController::StartSprint);
@@ -48,32 +41,16 @@ void ALoafPlayerController::SetupInputComponent()
 
 
 /** AXES **/
-void ALoafPlayerController::LookYaw(float value)
+void ALoafPlayerController::LookYaw(float Value)
 {
-	const float Actual = value * MouseXSensitivity;
+	const float Actual = Value * MouseXSensitivity;
 	AddYawInput(Actual);
 }
 
-void ALoafPlayerController::LookPitch(float value)
+void ALoafPlayerController::LookPitch(float Value)
 {
-	const float Actual = value * MouseYSensitivity;
+	const float Actual = Value * MouseYSensitivity;
 	AddPitchInput(Actual);
-}
-
-void ALoafPlayerController::MoveForwardBackward(float value)
-{
-	if (bPawnImplementsBasicMovement)
-	{
-		IBasicMovement::Execute_MoveForBack(GetPawn(), value);
-	}
-}
-
-void ALoafPlayerController::MoveLeftRight(float value)
-{
-	if (bPawnImplementsBasicMovement)
-	{
-		IBasicMovement::Execute_MoveLeftRight(GetPawn(), value);
-	}
 }
 
 

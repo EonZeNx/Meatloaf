@@ -43,3 +43,13 @@ void ULoafAttributeSet::OnRep_MaxJumpPower(const FGameplayAttributeData& OldMaxJ
 	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, MaxJumpPower, OldMaxJumpPower);
 }
 
+void ULoafAttributeSet::OnRep_CurrentJumps(const FGameplayAttributeData& OldCurrentJumps)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, CurrentJumps, OldCurrentJumps);
+}
+
+void ULoafAttributeSet::OnRep_MaxJumps(const FGameplayAttributeData& OldMaxJumps)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, MaxJumps, OldMaxJumps);
+}
+

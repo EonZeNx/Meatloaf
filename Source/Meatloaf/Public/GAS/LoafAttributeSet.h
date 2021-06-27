@@ -54,6 +54,16 @@ public:
 	FGameplayAttributeData MaxJumpPower;
 	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxJumpPower);
 
+	/* Current Jumps */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jumps", ReplicatedUsing = OnRep_CurrentJumps)
+	FGameplayAttributeData CurrentJumps;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, CurrentJumps);
+
+	/* Max Jumps */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jumps", ReplicatedUsing = OnRep_MaxJumps)
+	FGameplayAttributeData MaxJumps;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxJumps);
+
 
 	/** ATTRIBUTE REPS **/
 	/* Character Level */
@@ -75,4 +85,12 @@ public:
 	/* Max Jump Power */
 	UFUNCTION()
     virtual void OnRep_MaxJumpPower(const FGameplayAttributeData& OldHealth);
+
+	/* Current Jumps */
+	UFUNCTION()
+    virtual void OnRep_CurrentJumps(const FGameplayAttributeData& OldCurrentJumps);
+	
+	/* Max Jumps */
+	UFUNCTION()
+    virtual void OnRep_MaxJumps(const FGameplayAttributeData& OldMaxJumps);
 };

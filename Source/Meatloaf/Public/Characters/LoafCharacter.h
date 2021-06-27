@@ -7,6 +7,7 @@
 #include "Interfaces/BasicMovement.h"
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
+#include "Controllers/LoafPlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GAS/LoafAbilitySystemComponent.h"
 #include "GAS/LoafAttributeSet.h"
@@ -38,9 +39,11 @@ public:
 	
 protected:
 	/** REFERENCES **/
-	/* A reference to the owners' movement component. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Defaults")
 	UCharacterMovementComponent* CMC;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Defaults")
+	ALoafPlayerController* LoafController;
 
 	
 	/** MOVEMENT **/
@@ -69,17 +72,6 @@ protected:
 	/* Stance timings */
 	float CrouchTransitionTime;
 	float CurrentCrouchTransitionTime;
-
-	
-	/** JUMP **/
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jump Config")
-	int MaxAirJumps;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jump Config")
-	int CurrentAirJumps;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Jump Config")
-	float JumpScalar;
 	
 private:
 
@@ -88,6 +80,20 @@ private:
 public:
 	ALoafCharacter();
 
+	
+	/** CAMERA **/
+	UFUNCTION(BlueprintCallable)
+    virtual void LookYaw(float Value);
+	
+	UFUNCTION(BlueprintCallable)
+    virtual void LookPitch(float Value);
+
+
+	/** CMC **/
+	UFUNCTION(BlueprintCallable)
+    virtual bool IsFalling() const;
+
+	
 	/** GAS **/
 	// Required to use the Ability System Component
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
@@ -114,6 +120,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jump Power")
     float GetMaxJumpPower() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jumps")
+    int GetCurrentJumps() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Jumps")
+    int GetMaxJumps() const;
 	
 	
 protected:
@@ -125,7 +137,6 @@ protected:
 	
 	virtual void Landed(const FHitResult& Hit) override;
 	virtual void Tick(float DeltaTime) override;
-
 	
 	/** MOVEMENT **/
 	UFUNCTION(BlueprintCallable)
@@ -133,7 +144,7 @@ protected:
 	UFUNCTION(BlueprintCallable)
     virtual void MoveLeftRight_Implementation(float value) override;
 
-	
+
 	/** ACTIONS **/
 	/* Sprint */
 	UFUNCTION(BlueprintCallable)
@@ -156,4 +167,5 @@ private:
 	/** GAS **/
 	virtual void InitAttributes();
 	virtual void AddCharacterAbilities();
+	virtual bool IsAlive();
 };

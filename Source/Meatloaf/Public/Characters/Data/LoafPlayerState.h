@@ -29,13 +29,25 @@ protected:
 
 	/** ATTRIBUTES **/
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes")
-    float GetHealth() const;
+    int32 GetCharacterLevel() const;
 	
-	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes")
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Health")
+    float GetHealth() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Health")
+    float GetMaxHealth() const;
+	
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jump Power")
     float GetJumpPower() const;
 
-	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes")
-	int32 GetCharacterLevel() const;
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jump Power")
+    float GetMaxJumpPower() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jumps")
+    int GetCurrentJumps() const;
+
+	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Jumps")
+    int GetMaxJumps() const;
 	
 /** FUNCTIONS **/
 public:
@@ -48,7 +60,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState")
     bool IsAlive() const;
-
-	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|UI")
-    void ShowAbilityConfirmCancelText(bool ShowText);
 };

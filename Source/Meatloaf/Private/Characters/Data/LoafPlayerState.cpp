@@ -37,29 +37,44 @@ ULoafAttributeSet* ALoafPlayerState::GetDefaultAttributes() const
 	return DefaultAttributes;
 }
 
-int32 ALoafPlayerState::GetCharacterLevel() const
-{
-	return DefaultAttributes->GetCharacterLevel();
-}
-
 bool ALoafPlayerState::IsAlive() const
 {
 	return GetHealth() > 0.0f;
 }
 
-void ALoafPlayerState::ShowAbilityConfirmCancelText(bool ShowText)
-{
-	
-}
-
 
 /** ATTRIBUTES **/
+int32 ALoafPlayerState::GetCharacterLevel() const
+{
+	return DefaultAttributes->GetCharacterLevel();
+}
+
 float ALoafPlayerState::GetHealth() const
 {
 	return DefaultAttributes->GetHealth();
 }
 
+float ALoafPlayerState::GetMaxHealth() const
+{
+	return DefaultAttributes->GetMaxHealth();
+}
+
 float ALoafPlayerState::GetJumpPower() const
 {
 	return DefaultAttributes->GetJumpPower();
+}
+
+float ALoafPlayerState::GetMaxJumpPower() const
+{
+	return DefaultAttributes->GetMaxJumpPower();
+}
+
+int ALoafPlayerState::GetCurrentJumps() const
+{
+	return DefaultAttributes->GetCurrentJumps();
+}
+
+int ALoafPlayerState::GetMaxJumps() const
+{
+	return DefaultAttributes->GetMaxJumps();
 }
