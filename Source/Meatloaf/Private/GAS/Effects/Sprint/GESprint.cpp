@@ -14,6 +14,7 @@ UGESprint::UGESprint()
 	AddedTags.AddTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
 	InheritableOwnedTagsContainer.Added = AddedTags;
 
+	// TODO: This is not removing the modifer from the value on CancelAbility
 	Modifiers = TArray<FGameplayModifierInfo>();
 
 	FGameplayModifierInfo MaxMoveSpeed = FGameplayModifierInfo();

@@ -9,6 +9,7 @@
 #include "GameplayEffectTypes.h"
 #include "Characters/Data/LoafPlayerState.h"
 #include "Controllers/LoafPlayerController.h"
+#include "GAS/Abilities/GASprint.h"
 #include "GAS/Effects/Jump/GEReturnJumps.h"
 #include "GAS/Effects/Jump/GEUseJump.h"
 
@@ -97,8 +98,9 @@ void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveForwardBackward", this, &ALoafCharacter::MoveForBack_Implementation);
 	PlayerInputComponent->BindAxis("MoveLeftRight", this, &ALoafCharacter::MoveLeftRight_Implementation);
 	
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ALoafCharacter::CustomJump_Implementation);
-	
+	PlayerInputComponent->BindAction("ToggleSprint", IE_Pressed, this, &ALoafCharacter::ToggleSprint_Implementation);
+	PlayerInputComponent->BindAction("HoldSprint", IE_Pressed, this, &ALoafCharacter::StartSprint_Implementation);
+	PlayerInputComponent->BindAction("HoldSprint", IE_Released, this, &ALoafCharacter::StopSprint_Implementation);
 
 	// May get called in an init state where one is not setup yet.
 	BindAsc();
@@ -184,29 +186,31 @@ void ALoafCharacter::CustomJump_Implementation()
 /* Sprint */
 void ALoafCharacter::ToggleSprint_Implementation()
 {
-	// if (bIsSprinting) {
-	// 	StopSprint_Implementation();
-	// }
-	// else {
-	// 	StartSprint_Implementation();
-	// }
+	if (ASC->ComponentHasTag("State.Sprinting")) {
+		StopSprint_Implementation();
+	}
+	else
+	{
+		StartSprint_Implementation();
+	}
 }
 
 void ALoafCharacter::StartSprint_Implementation()
 {
-	// if (bIsSprinting) { return; }
-	//
-	// StopCrouch_Implementation();
-	// bIsSprinting = true;
-	// GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString(TEXT("StartSprint_Implementation")));
+	
+	if (ASC->ComponentHasTag("State.Sprinting")) return;
+	
+	ASC->AbilityLocalInputPressed(static_cast<int32>(ELoafAbilityInputID::Sprint));
 }
 
 void ALoafCharacter::StopSprint_Implementation()
 {
-	// if (!bIsSprinting) { return; }
-	//
-	// bIsSprinting = false;
-	// GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString(TEXT("StopSprint_Implementation")));
+	
+	if (!ASC->ComponentHasTag("State.Sprinting")) return;
+	
+	ASC->AbilityLocalInputReleased(static_cast<int32>(ELoafAbilityInputID::Sprint));
 }
 
 /* Crouch */

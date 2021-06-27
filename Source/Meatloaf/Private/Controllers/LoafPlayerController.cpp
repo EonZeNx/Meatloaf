@@ -27,10 +27,6 @@ void ALoafPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	/** ACTIONS **/
-	InputComponent->BindAction("ToggleSprint", IE_Pressed, this, &ALoafPlayerController::ToggleSprint);
-	InputComponent->BindAction("HoldSprint", IE_Pressed, this, &ALoafPlayerController::StartSprint);
-	InputComponent->BindAction("HoldSprint", IE_Released, this, &ALoafPlayerController::StopSprint);
-	
 	InputComponent->BindAction("ToggleCrouch", IE_Pressed, this, &ALoafPlayerController::ToggleCrouch);
 	InputComponent->BindAction("HoldCrouch", IE_Pressed, this, &ALoafPlayerController::StartCrouch);
 	InputComponent->BindAction("HoldCrouch", IE_Released, this, &ALoafPlayerController::StopCrouch);
