@@ -84,6 +84,10 @@ public:
 	UFUNCTION(BlueprintCallable)
     virtual void CustomJump_Implementation() override;
 
+	/* Attribute-bound functions */
+	void MoveAccelChange(const FOnAttributeChangeData& Data) const;
+	void MaxMoveSpeedChange(const FOnAttributeChangeData& Data) const;
+
 	// Switch on AbilityID to return individual ability levels. Hardcoded to 1 for every ability in this project.
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter")
     virtual int32 GetAbilityLevel(ELoafAbilityInputID AbilityID) const;

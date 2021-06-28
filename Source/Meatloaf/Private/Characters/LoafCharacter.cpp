@@ -12,6 +12,7 @@
 #include "GAS/Abilities/GASprint.h"
 #include "GAS/Effects/Jump/GEReturnJumps.h"
 #include "GAS/Effects/Jump/GEUseJump.h"
+#include "Meatloaf/Meatloaf.h"
 
 
 ALoafCharacter::ALoafCharacter()
@@ -75,6 +76,11 @@ void ALoafCharacter::PossessedBy(AController* NewController)
 		InitAttributes();
 		// AddStartupEffects();
 		AddCharacterAbilities();
+
+		
+		/* Attribute-bound functions */
+		ASC->GetGameplayAttributeValueChangeDelegate(DefaultAttributes->GetMoveAccelAttribute()).AddUObject(this, &ALoafCharacter::MoveAccelChange);
+		ASC->GetGameplayAttributeValueChangeDelegate(DefaultAttributes->GetMaxMoveSpeedAttribute()).AddUObject(this, &ALoafCharacter::MaxMoveSpeedChange);
 	}
 }
 
@@ -151,24 +157,23 @@ bool ALoafCharacter::IsFalling() const
 /** MOVEMENT **/
 void ALoafCharacter::MoveForBack_Implementation(float Value)
 {
-	if (Value != 0.0f)
-	{
-		AddMovementInput(GetActorForwardVector(), Value);
-	}
+	if (Value == 0.0f) return;
+	
+	AddMovementInput(GetActorForwardVector(), Value);
 }
 
 void ALoafCharacter::MoveLeftRight_Implementation(float Value)
 {
-	if (Value != 0.0f)
-	{
-		AddMovementInput(GetActorRightVector(), Value);
-	}
+	if (Value == 0.0f) return;
+
+	AddMovementInput(GetActorRightVector(), Value);
 }
 
 
 /** ACTIONS **/
 void ALoafCharacter::CustomJump_Implementation()
 {
+	// TODO: Move this to GAJump
 	if (CMC->IsFalling() && GetCurrentJumps() >= GetMaxJumps()) return;
 	
 	FVector JumpForce = FVector(0, 0, 1);
@@ -186,7 +191,8 @@ void ALoafCharacter::CustomJump_Implementation()
 /* Sprint */
 void ALoafCharacter::ToggleSprint_Implementation()
 {
-	if (ASC->ComponentHasTag("State.Sprinting")) {
+	if (ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting")))
+	{
 		StopSprint_Implementation();
 	}
 	else
@@ -197,18 +203,16 @@ void ALoafCharacter::ToggleSprint_Implementation()
 
 void ALoafCharacter::StartSprint_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString(TEXT("StartSprint_Implementation")));
-	
-	if (ASC->ComponentHasTag("State.Sprinting")) return;
+	const bool HasTag = ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
+	if (HasTag) return;
 	
 	ASC->AbilityLocalInputPressed(static_cast<int32>(ELoafAbilityInputID::Sprint));
 }
 
 void ALoafCharacter::StopSprint_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString(TEXT("StopSprint_Implementation")));
-	
-	if (!ASC->ComponentHasTag("State.Sprinting")) return;
+	const bool HasTag = ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
+	if (!HasTag) return;
 	
 	ASC->AbilityLocalInputReleased(static_cast<int32>(ELoafAbilityInputID::Sprint));
 }
@@ -250,11 +254,16 @@ class UAbilitySystemComponent* ALoafCharacter::GetAbilitySystemComponent() const
 	return ASC.Get();
 }
 
-int32 ALoafCharacter::GetAbilityLevel(ELoafAbilityInputID AbilityID) const
+/* Attribute-bound functions */
+void ALoafCharacter::MoveAccelChange(const FOnAttributeChangeData& Data) const
 {
-	return 1;
+	CMC->MaxAcceleration = Data.NewValue;
 }
 
+void ALoafCharacter::MaxMoveSpeedChange(const FOnAttributeChangeData& Data) const
+{
+	CMC->MaxWalkSpeed = Data.NewValue;
+}
 
 void ALoafCharacter::InitAttributes()
 {
@@ -311,6 +320,11 @@ void ALoafCharacter::BindAsc()
 		CMC->MaxAcceleration = GetMoveAccel();
 		CMC->MaxWalkSpeed = GetMaxMoveSpeed();
 	}
+}
+
+int32 ALoafCharacter::GetAbilityLevel(ELoafAbilityInputID AbilityID) const
+{
+	return 1;
 }
 
 

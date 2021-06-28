@@ -10,8 +10,12 @@ UGESprint::UGESprint()
 	DurationPolicy = EGameplayEffectDurationType::Infinite;
 	InheritableOwnedTagsContainer = FInheritedTagContainer();
 
+	FInheritedTagContainer NewAdded = FInheritedTagContainer();
+	NewAdded.AddTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
+	InheritableOwnedTagsContainer = NewAdded;
+	
 	FGameplayTagContainer AddedTags = FGameplayTagContainer();
-	AddedTags.AddTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
+	AddedTags.AddTagFast(FGameplayTag::RequestGameplayTag("State.Sprinting"));
 	InheritableOwnedTagsContainer.Added = AddedTags;
 
 	// TODO: This is not removing the modifer from the value on CancelAbility

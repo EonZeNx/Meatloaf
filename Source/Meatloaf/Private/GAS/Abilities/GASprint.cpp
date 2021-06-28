@@ -26,9 +26,6 @@ void UGASprint::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 	}
 
-	ALoafCharacter* LoafCharacter = CastChecked<ALoafCharacter>(ActorInfo->AvatarActor.Get());
-	UCharacterMovementComponent* CMC = LoafCharacter->GetCharacterMovement();
-
 	UGESprint* GESprint = NewObject<UGESprint>();
 	GESprintingHandle = ApplyGameplayEffectToOwner(Handle, ActorInfo, ActivationInfo, GESprint, 1.0f);
 }
@@ -68,10 +65,7 @@ void UGASprint::CancelAbility(const FGameplayAbilitySpecHandle Handle,
 	// GESprintRemoval is for client prediction, as it cannot predict we are going to remove a gameplay tag.
 	// This allows us to block sprinting on the client before the Server replies with its sprint removal confirmation.
 	UGESprintRemoval* GESprintRemoval =  NewObject<UGESprintRemoval>();
-	FActiveGameplayEffectHandle GESprintingRemovalHandle = ApplyGameplayEffectToOwner(Handle, ActorInfo, ActivationInfo, GESprintRemoval, 1.0f);
-
-	BP_RemoveGameplayEffectFromOwnerWithHandle(GESprintingHandle);
-	BP_RemoveGameplayEffectFromOwnerWithHandle(GESprintingRemovalHandle);
+	const FActiveGameplayEffectHandle GESprintingRemovalHandle = ApplyGameplayEffectToOwner(Handle, ActorInfo, ActivationInfo, GESprintRemoval, 1.0f);
 
 	ActorInfo->AbilitySystemComponent->RemoveActiveGameplayEffect(GESprintingHandle);
 	ActorInfo->AbilitySystemComponent->RemoveActiveGameplayEffect(GESprintingRemovalHandle);
