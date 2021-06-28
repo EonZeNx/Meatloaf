@@ -76,6 +76,9 @@ public:
 	UFUNCTION(BlueprintCallable)
     virtual bool IsFalling() const;
 
+	UFUNCTION(BlueprintCallable)
+    virtual bool IsSprinting() const;
+
 	
 	/** GAS **/
 	// Required to use the Ability System Component

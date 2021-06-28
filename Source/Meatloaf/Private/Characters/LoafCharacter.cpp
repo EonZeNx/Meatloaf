@@ -153,6 +153,11 @@ bool ALoafCharacter::IsFalling() const
 	return CMC->IsFalling();
 }
 
+bool ALoafCharacter::IsSprinting() const
+{
+	return ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
+}
+
 
 /** MOVEMENT **/
 void ALoafCharacter::MoveForBack_Implementation(float Value)
@@ -173,7 +178,6 @@ void ALoafCharacter::MoveLeftRight_Implementation(float Value)
 /** ACTIONS **/
 void ALoafCharacter::CustomJump_Implementation()
 {
-	// TODO: Move this to GAJump
 	if (CMC->IsFalling() && GetCurrentJumps() >= GetMaxJumps()) return;
 	
 	FVector JumpForce = FVector(0, 0, 1);
@@ -203,16 +207,14 @@ void ALoafCharacter::ToggleSprint_Implementation()
 
 void ALoafCharacter::StartSprint_Implementation()
 {
-	const bool HasTag = ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
-	if (HasTag) return;
+	if (IsSprinting()) return;
 	
 	ASC->AbilityLocalInputPressed(static_cast<int32>(ELoafAbilityInputID::Sprint));
 }
 
 void ALoafCharacter::StopSprint_Implementation()
 {
-	const bool HasTag = ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
-	if (!HasTag) return;
+	if (!IsSprinting()) return;
 	
 	ASC->AbilityLocalInputReleased(static_cast<int32>(ELoafAbilityInputID::Sprint));
 }
