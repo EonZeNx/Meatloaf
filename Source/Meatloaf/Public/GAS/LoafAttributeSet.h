@@ -74,16 +74,6 @@ public:
 	FGameplayAttributeData MaxMoveSpeed;
 	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxMoveSpeed);
 
-	/* Sprint Acceleration */
-	UPROPERTY(BlueprintReadOnly, Category="Attributes|Move Speed", ReplicatedUsing = OnRep_SprintAccel)
-	FGameplayAttributeData SprintAccel;
-	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, SprintAccel);
-
-	/* Max Sprint Move speed */
-	UPROPERTY(BlueprintReadOnly, Category="Attributes|Move Speed", ReplicatedUsing = OnRep_MaxSprintMoveSpeed)
-	FGameplayAttributeData MaxSprintMoveSpeed;
-	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxSprintMoveSpeed);
-
 
 	/** ATTRIBUTE REPS **/
 	/* Character Level */
@@ -125,12 +115,4 @@ public:
 	/* Max Move speed */
 	UFUNCTION()
     virtual void OnRep_MaxMoveSpeed(const FGameplayAttributeData& OldMaxMoveSpeed);
-
-	/* Sprint Acceleration */
-	UFUNCTION()
-    virtual void OnRep_SprintAccel(const FGameplayAttributeData& OldSprintAccel);
-
-	/* Sprint Acceleration */
-	UFUNCTION()
-    virtual void OnRep_MaxSprintMoveSpeed(const FGameplayAttributeData& OldMaxSprintMoveSpeed);
 };

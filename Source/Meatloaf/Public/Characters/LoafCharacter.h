@@ -125,12 +125,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Movement")
     float GetMaxMoveSpeed() const;
-
-	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Movement")
-    float GetSprintAccel() const;
-
-	UFUNCTION(BlueprintCallable, Category = "GAS|LoafCharacter|Attributes|Movement")
-    float GetMaxSprintMoveSpeed() const;
 	
 	
 protected:
@@ -167,6 +161,12 @@ protected:
 	UFUNCTION(BlueprintCallable)
     virtual void StopCrouch_Implementation() override;
 
+	/* Ability 1 */
+	UFUNCTION(BlueprintCallable)
+	virtual void ActivateAbility1();
+	UFUNCTION(BlueprintCallable)
+	virtual void DeactivateAbility1();
+	
 	
 private:
 	/** GAS **/

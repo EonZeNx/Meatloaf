@@ -27,8 +27,6 @@ void ULoafAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 
 	DOREPLIFETIME_CONDITION_NOTIFY(ULoafAttributeSet, MoveAccel, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(ULoafAttributeSet, MaxMoveSpeed, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(ULoafAttributeSet, SprintAccel, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(ULoafAttributeSet, MaxSprintMoveSpeed, COND_None, REPNOTIFY_Always);
 }
 
 
@@ -79,14 +77,4 @@ void ULoafAttributeSet::OnRep_MoveAccel(const FGameplayAttributeData& OldMoveAcc
 void ULoafAttributeSet::OnRep_MaxMoveSpeed(const FGameplayAttributeData& OldMaxMoveSpeed)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, MaxMoveSpeed, OldMaxMoveSpeed);
-}
-
-void ULoafAttributeSet::OnRep_SprintAccel(const FGameplayAttributeData& OldSprintAccel)
-{
-	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, SprintAccel, OldSprintAccel);
-}
-
-void ULoafAttributeSet::OnRep_MaxSprintMoveSpeed(const FGameplayAttributeData& OldMaxSprintMoveSpeed)
-{
-	GAMEPLAYATTRIBUTE_REPNOTIFY(ULoafAttributeSet, MaxSprintMoveSpeed, OldMaxSprintMoveSpeed);
 }

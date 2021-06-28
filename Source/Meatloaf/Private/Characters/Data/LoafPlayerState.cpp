@@ -92,13 +92,3 @@ float ALoafPlayerState::MaxMoveSpeed() const
 {
 	return DefaultAttributes->GetMaxMoveSpeed();
 }
-
-float ALoafPlayerState::GetSprintAccel() const
-{
-	return DefaultAttributes->GetSprintAccel();
-}
-
-float ALoafPlayerState::GetMaxSprintMoveSpeed() const
-{
-	return DefaultAttributes->GetMaxSprintMoveSpeed();
-}

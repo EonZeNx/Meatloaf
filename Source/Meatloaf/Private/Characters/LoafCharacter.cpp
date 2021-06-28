@@ -108,6 +108,9 @@ void ALoafCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAction("HoldSprint", IE_Pressed, this, &ALoafCharacter::StartSprint_Implementation);
 	PlayerInputComponent->BindAction("HoldSprint", IE_Released, this, &ALoafCharacter::StopSprint_Implementation);
 
+	PlayerInputComponent->BindAction("UseAbility1", IE_Pressed, this, &ALoafCharacter::ActivateAbility1);
+	PlayerInputComponent->BindAction("UseAbility1", IE_Released, this, &ALoafCharacter::DeactivateAbility1);
+
 	// May get called in an init state where one is not setup yet.
 	BindAsc();
 }
@@ -247,6 +250,18 @@ void ALoafCharacter::StopCrouch_Implementation()
 	// CurrentCrouchTransitionTime = CrouchTransitionTime;
 	// bIsCrouching = false;
 	// GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+}
+
+
+/* Ability 1 */
+void ALoafCharacter::ActivateAbility1()
+{
+	ASC->AbilityLocalInputPressed(static_cast<int32>(ELoafAbilityInputID::Adrenaline));
+}
+
+void ALoafCharacter::DeactivateAbility1()
+{
+	ASC->AbilityLocalInputReleased(static_cast<int32>(ELoafAbilityInputID::Adrenaline));
 }
 
 
@@ -401,18 +416,4 @@ float ALoafCharacter::GetMaxMoveSpeed() const
 	if (!DefaultAttributes.IsValid()) { return 0.0f; }
 	
 	return DefaultAttributes->GetMaxMoveSpeed();
-}
-
-float ALoafCharacter::GetSprintAccel() const
-{
-	if (!DefaultAttributes.IsValid()) { return 0.0f; }
-	
-	return DefaultAttributes->GetSprintAccel();
-}
-
-float ALoafCharacter::GetMaxSprintMoveSpeed() const
-{
-	if (!DefaultAttributes.IsValid()) { return 0.0f; }
-	
-	return DefaultAttributes->GetMaxSprintMoveSpeed();
 }

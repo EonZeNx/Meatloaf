@@ -60,12 +60,6 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Movement")
     float MaxMoveSpeed() const;
 
-	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Movement")
-    float GetSprintAccel() const;
-
-	UFUNCTION(BlueprintCallable, Category = "GAS|LoafPlayerState|Attributes|Movement")
-    float GetMaxSprintMoveSpeed() const;
-
 	
 /** FUNCTIONS **/
 public:
