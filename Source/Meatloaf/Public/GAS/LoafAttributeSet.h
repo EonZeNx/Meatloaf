@@ -28,20 +28,109 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	/* ATTRIBUTES */
+	/** ATTRIBUTES **/
+	/* Character Level */
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes|Character Level", ReplicatedUsing = OnRep_CharacterLevel)
+	FGameplayAttributeData CharacterLevel;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, CharacterLevel)
+	
 	/* Health */
-	UPROPERTY(BlueprintReadOnly, Category="Attributes", ReplicatedUsing=OnRep_Health)
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Health", ReplicatedUsing = OnRep_Health)
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, Health);
 
-	UFUNCTION()
-	virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
+	/* Max Health */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Health", ReplicatedUsing = OnRep_MaxHealth)
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxHealth);
 
 	/* Jump power */
-	UPROPERTY(BlueprintReadOnly, Category="Attributes", ReplicatedUsing=OnRep_JumpPower)
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jump Power", ReplicatedUsing = OnRep_JumpPower)
 	FGameplayAttributeData JumpPower;
 	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, JumpPower);
 
+	/* Max Jump Power */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jump Power", ReplicatedUsing = OnRep_MaxJumpPower)
+	FGameplayAttributeData MaxJumpPower;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxJumpPower);
+
+	/* Current Jumps */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jumps", ReplicatedUsing = OnRep_CurrentJumps)
+	FGameplayAttributeData CurrentJumps;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, CurrentJumps);
+
+	/* Max Jumps */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Jumps", ReplicatedUsing = OnRep_MaxJumps)
+	FGameplayAttributeData MaxJumps;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxJumps);
+
+	/* Move Acceleration */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Move Speed", ReplicatedUsing = OnRep_MoveAccel)
+	FGameplayAttributeData MoveAccel;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MoveAccel);
+
+	/* Max Move speed */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Move Speed", ReplicatedUsing = OnRep_MaxMoveSpeed)
+	FGameplayAttributeData MaxMoveSpeed;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxMoveSpeed);
+
+	/* Sprint Acceleration */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Move Speed", ReplicatedUsing = OnRep_SprintAccel)
+	FGameplayAttributeData SprintAccel;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, SprintAccel);
+
+	/* Max Sprint Move speed */
+	UPROPERTY(BlueprintReadOnly, Category="Attributes|Move Speed", ReplicatedUsing = OnRep_MaxSprintMoveSpeed)
+	FGameplayAttributeData MaxSprintMoveSpeed;
+	ATTRIBUTE_ACCESSORS(ULoafAttributeSet, MaxSprintMoveSpeed);
+
+
+	/** ATTRIBUTE REPS **/
+	/* Character Level */
+	UFUNCTION()
+	virtual void OnRep_CharacterLevel(const FGameplayAttributeData& OldCharacterLevel);
+
+	
+	/* Health */
+	UFUNCTION()
+    virtual void OnRep_Health(const FGameplayAttributeData& OldHealth);
+	
+	/* Max Health */
+	UFUNCTION()
+    virtual void OnRep_MaxHealth(const FGameplayAttributeData& OldHealth);
+
+	
+	/* Jump power */
 	UFUNCTION()
     virtual void OnRep_JumpPower(const FGameplayAttributeData& OldJumpPower);
+	
+	/* Max Jump Power */
+	UFUNCTION()
+    virtual void OnRep_MaxJumpPower(const FGameplayAttributeData& OldHealth);
+
+	
+	/* Current Jumps */
+	UFUNCTION()
+    virtual void OnRep_CurrentJumps(const FGameplayAttributeData& OldCurrentJumps);
+	
+	/* Max Jumps */
+	UFUNCTION()
+    virtual void OnRep_MaxJumps(const FGameplayAttributeData& OldMaxJumps);
+
+	
+	/* Move Acceleration */
+	UFUNCTION()
+    virtual void OnRep_MoveAccel(const FGameplayAttributeData& OldMoveAccel);
+
+	/* Max Move speed */
+	UFUNCTION()
+    virtual void OnRep_MaxMoveSpeed(const FGameplayAttributeData& OldMaxMoveSpeed);
+
+	/* Sprint Acceleration */
+	UFUNCTION()
+    virtual void OnRep_SprintAccel(const FGameplayAttributeData& OldSprintAccel);
+
+	/* Sprint Acceleration */
+	UFUNCTION()
+    virtual void OnRep_MaxSprintMoveSpeed(const FGameplayAttributeData& OldMaxSprintMoveSpeed);
 };

@@ -4,3 +4,4 @@
 
 #include "CoreMinimal.h"
 
+void DebugMsg(FString Msg, float TimeToDisplay = 5.f, FColor Colour = FColor::Red);
