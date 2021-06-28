@@ -8,4 +8,5 @@ enum class ELoafAbilityInputID : uint8 {
 	Confirm		UMETA(DisplayName="Confirm"),
 	Cancel		UMETA(DisplayName="Cancel"),
 	Jump		UMETA(DisplayName="Jump"),
+	Sprint		UMETA(DisplayName="Sprint")
 };
