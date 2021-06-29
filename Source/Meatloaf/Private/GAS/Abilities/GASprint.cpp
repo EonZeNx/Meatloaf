@@ -13,6 +13,9 @@ UGASprint::UGASprint()
 	AbilityInputID = ELoafAbilityInputID::Sprint;
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Sprint")));
+
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Sprinting")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.SprintingRemoval")));
 }
 
 void UGASprint::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -37,8 +40,7 @@ bool UGASprint::CanActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	if (!Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags)) { return false; }
 
 	const ALoafCharacter* LoafCharacter = CastChecked<ALoafCharacter>(ActorInfo->AvatarActor.Get(), ECastCheckedType::NullAllowed);
-	return LoafCharacter
-		&& (!TargetTags->HasTag(FGameplayTag::RequestGameplayTag("State.SprintingRemoval")));
+	return LoafCharacter->IsValidLowLevelFast();
 }
 
 void UGASprint::InputReleased(const FGameplayAbilitySpecHandle Handle,
