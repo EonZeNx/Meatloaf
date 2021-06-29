@@ -66,7 +66,7 @@ void UGASprint::CancelAbility(const FGameplayAbilitySpecHandle Handle,
 
 	// GESprintRemoval is for client prediction, as it cannot predict we are going to remove a gameplay tag.
 	// This allows us to block sprinting on the client before the Server replies with its sprint removal confirmation.
-	UGESprintRemoval* GESprintRemoval =  NewObject<UGESprintRemoval>();
+	UGESprintRemoval* GESprintRemoval = NewObject<UGESprintRemoval>();
 	const FActiveGameplayEffectHandle GESprintingRemovalHandle = ApplyGameplayEffectToOwner(Handle, ActorInfo, ActivationInfo, GESprintRemoval, 1.0f);
 
 	ActorInfo->AbilitySystemComponent->RemoveActiveGameplayEffect(GESprintingHandle);

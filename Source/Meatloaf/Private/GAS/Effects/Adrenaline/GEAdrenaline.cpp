@@ -8,7 +8,9 @@
 
 UGEAdrenaline::UGEAdrenaline()
 {
-	DurationPolicy = EGameplayEffectDurationType::Infinite;
+	DurationPolicy = EGameplayEffectDurationType::HasDuration;
+	DurationMagnitude = FScalableFloat(5.f);
+	
 	InheritableOwnedTagsContainer = FInheritedTagContainer();
 
 	FInheritedTagContainer NewAdded = FInheritedTagContainer();

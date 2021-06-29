@@ -13,6 +13,9 @@ UGAAdrenaline::UGAAdrenaline()
 	AbilityInputID = ELoafAbilityInputID::Adrenaline;
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Adrenaline")));
+
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Effect.Skill.Adrenaline")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Effect.Skill.AdrenalineRemoval")));
 }
 
 void UGAAdrenaline::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -37,14 +40,13 @@ bool UGAAdrenaline::CanActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	if (!Super::CanActivateAbility(Handle, ActorInfo, SourceTags, TargetTags, OptionalRelevantTags)) { return false; }
 
 	const ALoafCharacter* LoafCharacter = CastChecked<ALoafCharacter>(ActorInfo->AvatarActor.Get(), ECastCheckedType::NullAllowed);
-	return LoafCharacter
-		&& (!TargetTags->HasTag(FGameplayTag::RequestGameplayTag("Effect.Skill.Adrenaline"))
-			&& !TargetTags->HasTag(FGameplayTag::RequestGameplayTag("Effect.Skill.AdrenalineRemoval")));
+	return LoafCharacter->IsValidLowLevelFast();
 }
 
 void UGAAdrenaline::InputReleased(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo)
 {
+	// TODO: Do not cancel the ability on input released
 	if (ActorInfo != NULL && ActorInfo->AvatarActor != NULL)
 	{
 		CancelAbility(Handle, ActorInfo, ActivationInfo, true);
@@ -65,7 +67,7 @@ void UGAAdrenaline::CancelAbility(const FGameplayAbilitySpecHandle Handle,
 
 	// GESprintRemoval is for client prediction, as it cannot predict we are going to remove a gameplay tag.
 	// This allows us to block sprinting on the client before the Server replies with its sprint removal confirmation.
-	UGEAdrenalineRemoval* GEAdrenalineRemoval =  NewObject<UGEAdrenalineRemoval>();
+	UGEAdrenalineRemoval* GEAdrenalineRemoval = NewObject<UGEAdrenalineRemoval>();
 	const FActiveGameplayEffectHandle GEAdrenalineRemovalHandle = ApplyGameplayEffectToOwner(Handle, ActorInfo, ActivationInfo, GEAdrenalineRemoval, 1.0f);
 
 	ActorInfo->AbilitySystemComponent->RemoveActiveGameplayEffect(GEAdrenalineHandle);
