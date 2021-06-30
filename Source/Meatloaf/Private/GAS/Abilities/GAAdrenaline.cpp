@@ -11,7 +11,7 @@
 UGAAdrenaline::UGAAdrenaline()
 {
 	AbilityInputID = ELoafAbilityInputID::Adrenaline;
-	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
+	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Adrenaline")));
 
 	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Effect.Skill.Adrenaline")));
@@ -65,8 +65,8 @@ void UGAAdrenaline::CancelAbility(const FGameplayAbilitySpecHandle Handle,
 
 	Super::CancelAbility(Handle, ActorInfo, ActivationInfo, bReplicateCancelAbility);
 
-	// GESprintRemoval is for client prediction, as it cannot predict we are going to remove a gameplay tag.
-	// This allows us to block sprinting on the client before the Server replies with its sprint removal confirmation.
+	// GEAdrenalineRemoval is for client prediction, as it cannot predict we are going to remove a gameplay tag.
+	// This allows us to block adrenaline on the client before the Server replies with its adrenaline removal confirmation.
 	UGEAdrenalineRemoval* GEAdrenalineRemoval = NewObject<UGEAdrenalineRemoval>();
 	const FActiveGameplayEffectHandle GEAdrenalineRemovalHandle = ApplyGameplayEffectToOwner(Handle, ActorInfo, ActivationInfo, GEAdrenalineRemoval, 1.0f);
 
