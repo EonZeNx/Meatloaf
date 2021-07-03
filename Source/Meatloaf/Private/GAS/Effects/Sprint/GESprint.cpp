@@ -3,7 +3,6 @@
 
 #include "GAS/Effects/Sprint/GESprint.h"
 #include "GAS/LoafAttributeSet.h"
-#include "Meatloaf/Meatloaf.h"
 
 
 UGESprint::UGESprint()
@@ -12,9 +11,6 @@ UGESprint::UGESprint()
 
 	const FGameplayTag ActiveTag = FGameplayTag::RequestGameplayTag("State.Skill.Sprint.Active", true);
 	InheritableOwnedTagsContainer.AddTag(ActiveTag);
-
-	const bool HasTagAdded = InheritableOwnedTagsContainer.Added.HasTag(ActiveTag);
-	DebugMsg(FString::Printf(TEXT("HasTag: %hs"), HasTagAdded ? "True" : "False"));
 	
 	Modifiers = TArray<FGameplayModifierInfo>();
 
