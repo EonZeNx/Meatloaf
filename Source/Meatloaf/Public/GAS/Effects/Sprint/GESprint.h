@@ -16,4 +16,8 @@ class MEATLOAF_API UGESprint : public UGameplayEffect
 
 public:
 	UGESprint();
+
+protected:
+	UPROPERTY(EditDefaultsOnly, Category="Value")
+	float SprintAdditiveValue = 256.f;
 };

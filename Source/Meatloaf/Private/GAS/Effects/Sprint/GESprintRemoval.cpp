@@ -8,9 +8,7 @@
 UGESprintRemoval::UGESprintRemoval()
 {
 	DurationPolicy = EGameplayEffectDurationType::Infinite;
-	InheritableOwnedTagsContainer = FInheritedTagContainer();
 
-	FGameplayTagContainer AddedTags = FGameplayTagContainer();
-	AddedTags.AddTag(FGameplayTag::RequestGameplayTag("State.SprintingRemoval"));
-	InheritableOwnedTagsContainer.Added = AddedTags;
+	const FGameplayTag RemovalTag = FGameplayTag::RequestGameplayTag("State.Skill.Sprint.PendingRemoval", true);
+	InheritableOwnedTagsContainer.AddTag(RemovalTag);
 }

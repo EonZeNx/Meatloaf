@@ -11,11 +11,6 @@ UGEAdrenalineRemoval::UGEAdrenalineRemoval()
 	DurationPolicy = EGameplayEffectDurationType::Infinite;
 	InheritableOwnedTagsContainer = FInheritedTagContainer();
 
-	FInheritedTagContainer NewAdded = FInheritedTagContainer();
-	NewAdded.AddTag(FGameplayTag::RequestGameplayTag("Effect.Skill.AdrenalineRemoval"));
-	InheritableOwnedTagsContainer = NewAdded;
-	
-	FGameplayTagContainer AddedTags = FGameplayTagContainer();
-	AddedTags.AddTagFast(FGameplayTag::RequestGameplayTag("Effect.Skill.AdrenalineRemoval"));
-	InheritableOwnedTagsContainer.Added = AddedTags;
+	const FGameplayTag RemovalTag = FGameplayTag::RequestGameplayTag("State.Skill.Adrenaline.PendingRemoval");
+	InheritableOwnedTagsContainer.AddTag(RemovalTag);
 }

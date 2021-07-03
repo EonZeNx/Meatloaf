@@ -11,6 +11,7 @@
 #include "Controllers/LoafPlayerController.h"
 #include "GAS/Effects/Jump/GEReturnJumps.h"
 #include "GAS/Effects/Jump/GEUseJump.h"
+#include "Meatloaf/Meatloaf.h"
 
 
 ALoafCharacter::ALoafCharacter()
@@ -156,7 +157,7 @@ bool ALoafCharacter::IsFalling() const
 
 bool ALoafCharacter::IsSprinting() const
 {
-	return ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting"));
+	return ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Skill.Sprint.Active"));
 }
 
 
@@ -196,7 +197,7 @@ void ALoafCharacter::CustomJump_Implementation()
 /* Sprint */
 void ALoafCharacter::ToggleSprint_Implementation()
 {
-	if (ASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag("State.Sprinting")))
+	if (IsSprinting())
 	{
 		StopSprint_Implementation();
 	}

@@ -14,8 +14,8 @@ UGASprint::UGASprint()
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Sprint")));
 
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Sprinting")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.SprintingRemoval")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Skill.Sprint.Active")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Skill.Sprint.PendingRemoval")));
 }
 
 void UGASprint::ActivateAbility(const FGameplayAbilitySpecHandle Handle,

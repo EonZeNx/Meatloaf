@@ -14,8 +14,8 @@ UGAAdrenaline::UGAAdrenaline()
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Adrenaline")));
 
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Effect.Skill.Adrenaline")));
-	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Effect.Skill.AdrenalineRemoval")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Skill.Adrenaline.Active")));
+	ActivationBlockedTags.AddTag(FGameplayTag::RequestGameplayTag(FName("State.Skill.Adrenaline.PendingRemoval")));
 }
 
 void UGAAdrenaline::ActivateAbility(const FGameplayAbilitySpecHandle Handle,

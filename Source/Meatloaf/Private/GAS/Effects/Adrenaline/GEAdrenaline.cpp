@@ -11,15 +11,8 @@ UGEAdrenaline::UGEAdrenaline()
 	DurationPolicy = EGameplayEffectDurationType::HasDuration;
 	DurationMagnitude = FScalableFloat(5.f);
 	
-	InheritableOwnedTagsContainer = FInheritedTagContainer();
-
-	FInheritedTagContainer NewAdded = FInheritedTagContainer();
-	NewAdded.AddTag(FGameplayTag::RequestGameplayTag("Effect.Skill.Adrenaline"));
-	InheritableOwnedTagsContainer = NewAdded;
-	
-	FGameplayTagContainer AddedTags = FGameplayTagContainer();
-	AddedTags.AddTagFast(FGameplayTag::RequestGameplayTag("Effect.Skill.Adrenaline"));
-	InheritableOwnedTagsContainer.Added = AddedTags;
+	const FGameplayTag ActiveTag = FGameplayTag::RequestGameplayTag("State.Skill.Adrenaline.Active");
+	InheritableOwnedTagsContainer.AddTag(ActiveTag);
 
 	Modifiers = TArray<FGameplayModifierInfo>();
 
