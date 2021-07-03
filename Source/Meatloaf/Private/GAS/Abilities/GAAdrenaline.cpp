@@ -98,6 +98,9 @@ void UGAAdrenaline::CancelAbilityDelegate(const FGameplayEffectRemovalInfo& Game
 		EffectEnded = true;
 		CancelAbility(ThisHandle, ThisActorInfo, ThisActivationInfo, true);
 		EffectEnded = false;
+
+		// May need to enable this if delegate does not override itself each time the ability is activated
+		// WGERAdrenaline->OnRemoved.Remove(DelegateCancel);
 	}
 }
 
