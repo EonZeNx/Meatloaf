@@ -9,4 +9,5 @@ IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Meatloaf, "Meatloaf" );
 void DebugMsg(FString Msg, float TimeToDisplay, FColor Colour)
 {
 	GEngine->AddOnScreenDebugMessage(-1, TimeToDisplay, Colour, Msg);
+	// DebugMsg(FString::Printf(TEXT("IsWaitingOnRemotePlayerdata: %hhd"), IsWaitingOnRemotePlayerdata));
 }
